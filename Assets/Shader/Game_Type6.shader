@@ -1,56 +1,67 @@
-Shader "Game/Type6" {
-	Properties {
-		_MainTex ("Tex (RGB)", 2D) = "white" {}
+Shader "Game/Type6"
+{
+	Properties
+	{
+		_MainTex("Tex (RGB)", 2D) = "white" {}
 	}
-	//DummyShaderTextExporter
-	SubShader{
-		Tags { "RenderType"="Opaque" }
+
+	SubShader
+	{
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" "IgnoreProjector" = "True" }
 		LOD 200
+
+		Blend SrcAlpha OneMinusSrcAlpha
+		ZWrite Off
+		Lighting Off
 
 		Pass
 		{
-			HLSLPROGRAM
+			CGPROGRAM
+
 			#pragma vertex vert
 			#pragma fragment frag
 
-			float4x4 unity_ObjectToWorld;
-			float4x4 unity_MatrixVP;
-			float4 _MainTex_ST;
+			#include "UnityCG.cginc"
 
-			struct Vertex_Stage_Input
+			struct a2v
 			{
-				float4 pos : POSITION;
-				float2 uv : TEXCOORD0;
+				float4 vertex : POSITION;
+				float2 uv0 : TEXCOORD0;
+				float4 color : COLOR;
 			};
 
-			struct Vertex_Stage_Output
+			struct v2f
 			{
-				float2 uv : TEXCOORD0;
-				float4 pos : SV_POSITION;
+				float4 vertex : SV_POSITION;
+				float2 uv0 : TEXCOORD0;
+				float4 color : COLOR;
 			};
 
-			Vertex_Stage_Output vert(Vertex_Stage_Input input)
+			sampler2D _MainTex;
+
+
+			v2f vert( a2v v )
 			{
-				Vertex_Stage_Output output;
-				output.uv = (input.uv.xy * _MainTex_ST.xy) + _MainTex_ST.zw;
-				output.pos = mul(unity_MatrixVP, mul(unity_ObjectToWorld, input.pos));
-				return output;
+				v2f o;
+				o.vertex = UnityObjectToClipPos( v.vertex );
+				o.uv0 = v.uv0;
+				o.color = v.color;
+
+				return o;
 			}
 
-			Texture2D<float4> _MainTex;
-			SamplerState sampler_MainTex;
-
-			struct Fragment_Stage_Input
+			fixed4 frag(v2f i) : SV_Target
 			{
-				float2 uv : TEXCOORD0;
-			};
+				fixed4 col = tex2D(_MainTex , i.uv0);
+//				col.a = ( col.r * 0.5f + col.g * 0.5f + col.b * 0.5f );
+				col.a = max( max( col.r , col.g ) , col.b ) * i.color.a;
 
-			float4 frag(Fragment_Stage_Input input) : SV_TARGET
-			{
-				return _MainTex.Sample(sampler_MainTex, input.uv.xy);
+				return col;
 			}
 
-			ENDHLSL
+			ENDCG
 		}
+
 	}
+
 }

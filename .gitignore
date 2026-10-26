@@ -107,3 +107,11 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Resource
+/Assets/Resources/
+/Assets/Resources.meta
+/Assets/Sprite/
+/Assets/Sprite.meta
+/Assets/Texture2D/
+/Assets/Texture2D.meta

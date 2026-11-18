@@ -22,31 +22,31 @@ public class GameBattleUnitActionUI : GameUI<GameBattleUnitActionUI>
 
     public override void initSingleton()
     {
-        GameObject obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ 0 ] = obj.GetComponent<GameAnimation>();
         obj.name = "burst";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( -50 - 12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ 1 ] = obj.GetComponent<GameAnimation>();
         obj.name = "skill";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( -25 - 12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ 2 ] = obj.GetComponent<GameAnimation>();
         obj.name = "attack";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( -12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ 3 ] = obj.GetComponent<GameAnimation>();
         obj.name = "item";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( 12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ 4 ] = obj.GetComponent<GameAnimation>();
         obj.name = "stand";
         obj.transform.SetParent( transform );

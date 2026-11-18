@@ -45,17 +45,11 @@ public class GameSLUI : GameUI<GameSLUI>
 
     void onLoadGame()
     {
-        GameUserData.instance.load( selection , false );
+        GameUserData.instance.load( selection  );
     }
 
-    public void showLoading()
-    {
-        loading.text = GameStringData.instance.getString( GameStringType.Cloud0 );
-    }
-    public void showLoadingComplete()
-    {
-        loading.text = GameStringData.instance.getString( GameStringType.Cloud1 );
-    }
+
+
 
     public void onClick()
     {
@@ -67,7 +61,7 @@ public class GameSLUI : GameUI<GameSLUI>
                 {
                     case GameSLType.Save:
                         {
-                            GameUserData.instance.save( selection , false );
+                            GameUserData.instance.save( selection  );
 
                             updateData();
                         }
@@ -149,7 +143,7 @@ public class GameSLUI : GameUI<GameSLUI>
 
         show();
 
-        text.text = GameStringData.instance.getString( GameStringType.CloudSL8 + (int)t );
+        text.text = GameStringData.instance.getString( GameStringType.SaveTitle + (int)t );
         loading.text = "";
 
         updateData();

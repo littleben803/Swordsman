@@ -31,25 +31,25 @@ public class GameBattleUnitActionItemUI : GameUI<GameBattleUnitActionItemUI>
 
     public override void initSingleton()
     {
-        GameObject obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ (int)GameBattleUnitActionItemMode.Use ] = obj.GetComponent<GameAnimation>();
         obj.name = "use";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( -50 - 12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ (int)GameBattleUnitActionItemMode.Give ] = obj.GetComponent<GameAnimation>();
         obj.name = "give";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( -25 - 12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ (int)GameBattleUnitActionItemMode.Equip ] = obj.GetComponent<GameAnimation>();
         obj.name = "equip";
         obj.transform.SetParent( transform );
         obj.transform.localPosition = new Vector3( -12.5f + 14.0f , 11 , 0.0f );
 
-        obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Man_int" ) );
+        obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_int" ) );
         animations[ (int)GameBattleUnitActionItemMode.Drop ] = obj.GetComponent<GameAnimation>();
         obj.name = "drop";
         obj.transform.SetParent( transform );

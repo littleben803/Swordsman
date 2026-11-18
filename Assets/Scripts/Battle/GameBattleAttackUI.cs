@@ -152,7 +152,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         string path = "Prefab/Stage/Stage" + GameDefine.getString2( GameUserData.instance.Stage ) + "/FLOOR_";
         path += GameDefine.getString2( GameUserData.instance.Stage );
 
-        GameObject gameObjectFloor = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject gameObjectFloor = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         floorAnimation = gameObjectFloor.GetComponent<GameAnimation>();
         floorAnimation.UI = true;
         floorAnimation.showFrame( f );
@@ -166,7 +166,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
             path = "Prefab/Sprite/man" + GameDefine.getString3( lt.Sprite ) + "/";
             path += ( GameDefine.getString3( lt.Sprite ) + "MISC" );
 
-            GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             leftAnimation = obj.GetComponent<GameAnimation>();
             leftAnimation.UI = true;
             leftAnimation.showFrame( 6 + ( leftAnimation.safHead.count3[ 0 ] == 0 ? 1 : leftAnimation.safHead.count3[ 0 ] ) );
@@ -185,7 +185,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
             path += ( m.BattleSprite > 0 ? "-" + m.BattleSprite : "" );
             path += "s";
 
-            obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             attackerAnimation = obj.GetComponent<GameAnimation>();
             attackerAnimation.UI = true;
             attackerAnimation.onAnimationEvent = onAnimationEvent;
@@ -201,7 +201,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
             path = "Prefab/Sprite/man" + GameDefine.getString3( rt.Sprite ) + "/";
             path += ( GameDefine.getString3( rt.Sprite ) + "MISC" );
 
-            GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             rightAnimation = obj.GetComponent<GameAnimation>();
             rightAnimation.UI = true;
             rightAnimation.showFrame( 6 + ( rightAnimation.safHead.count3[ 0 ] == 0 ? 1 : rightAnimation.safHead.count3[ 0 ] ) );
@@ -220,7 +220,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
             path += ( m.BattleSprite > 0 ? "-" + m.BattleSprite : "" );
             path += "s";
 
-            obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             attackerAnimation = obj.GetComponent<GameAnimation>();
             attackerAnimation.UI = true;
             attackerAnimation.onAnimationEvent = onAnimationEvent;
@@ -286,7 +286,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
 
         string path = "Prefab/Misc/Ftlup_r";
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         Transform trans = obj.transform;
         trans.SetParent( right.transform );
         trans.localScale = Vector3.one;
@@ -330,7 +330,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         string path = "Prefab/Stage/Stage" + GameDefine.getString2( GameUserData.instance.Stage ) + "/FLOOR_";
         path += GameDefine.getString2( GameUserData.instance.Stage );
 
-        GameObject gameObjectFloor = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject gameObjectFloor = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         floorAnimation = gameObjectFloor.GetComponent<GameAnimation>();
         floorAnimation.UI = true;
         floorAnimation.showFrame( f );
@@ -344,7 +344,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         path = "Prefab/Sprite/man" + GameDefine.getString3( rt.Sprite ) + "/";
         path += ( GameDefine.getString3( rt.Sprite ) + "MISC" );
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         rightAnimation = obj.GetComponent<GameAnimation>();
         rightAnimation.UI = true;
         rightAnimation.showFrame( 6 + ( rightAnimation.safHead.count3[ 0 ] == 0 ? 1 : rightAnimation.safHead.count3[ 0 ] ) );
@@ -361,7 +361,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         path = "Prefab/Sprite/man" + GameDefine.getString3( lt.Sprite ) + "/";
         path += ( GameDefine.getString3( lt.Sprite ) + "MISC" );
 
-        GameObject obj1 = Resources.Load<GameObject>( path );
+        GameObject obj1 = SwordsmanHd4xResources.LoadPrefab( path );
 
         if ( obj1 == null )
         {
@@ -391,7 +391,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
             path += ( m.BattleSprite > 0 ? "-" + m.BattleSprite : "" );
             path += ( result.type == GameBattleAttackResultPhysical.Type.Block ? "sb" : "s" );
 
-            obj1 = Resources.Load<GameObject>( path );
+            obj1 = SwordsmanHd4xResources.LoadPrefab( path );
 
             if ( obj1 == null )
             {
@@ -426,7 +426,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
             path += ( m.BattleSprite > 0 ? "-" + m.BattleSprite : "" );
             path += ( result.type == GameBattleAttackResultPhysical.Type.Block ? "sb" : "s" );
 
-            obj1 = Resources.Load<GameObject>( path );
+            obj1 = SwordsmanHd4xResources.LoadPrefab( path );
 
             if ( obj1 == null )
             {
@@ -489,7 +489,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         string path = "Prefab/Stage/Stage" + GameDefine.getString2( GameUserData.instance.Stage ) + "/FLOOR_";
         path += GameDefine.getString2( GameUserData.instance.Stage );
 
-        GameObject gameObjectFloor = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject gameObjectFloor = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         floorAnimation = gameObjectFloor.GetComponent<GameAnimation>();
         floorAnimation.UI = true;
         floorAnimation.showFrame( f );
@@ -503,7 +503,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         path = "Prefab/Sprite/man" + GameDefine.getString3( rt.Sprite ) + "/";
         path += ( GameDefine.getString3( rt.Sprite ) + "MISC" );
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         rightAnimation = obj.GetComponent<GameAnimation>();
         rightAnimation.UI = true;
         rightAnimation.showFrame( 6 + ( rightAnimation.safHead.count3[ 0 ] == 0 ? 1 : rightAnimation.safHead.count3[ 0 ] ) );
@@ -520,7 +520,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         path = "Prefab/Sprite/man" + GameDefine.getString3( lt.Sprite ) + "/";
         path += ( GameDefine.getString3( lt.Sprite ) + "MISC" );
 
-        obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         leftAnimation = obj.GetComponent<GameAnimation>();
         leftAnimation.UI = true;
         leftAnimation.showFrame( 6 + ( leftAnimation.safHead.count3[ 0 ] == 0 ? 1 : leftAnimation.safHead.count3[ 0 ] ) );
@@ -540,7 +540,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
                 GameDefine.getString3( lt.Sprite );
             path += ( result.type == GameBattleAttackResultPhysical.Type.Block ? "ab" : "a" );
 
-            GameObject object1 = Resources.Load<GameObject>( path );
+            GameObject object1 = SwordsmanHd4xResources.LoadPrefab( path );
 
             if ( object1 == null )
             {
@@ -575,7 +575,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
                 GameDefine.getString3( rt.Sprite );
             path += ( result.type == GameBattleAttackResultPhysical.Type.Block ? "ab" : "a" );
 
-            GameObject object1 = Resources.Load<GameObject>( path );
+            GameObject object1 = SwordsmanHd4xResources.LoadPrefab( path );
 
             if ( object1 == null )
             {
@@ -849,7 +849,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
                         {
                             string path = "Prefab/Misc/Sp003" + ( side == GameBattleAttackResultSide.Left ? "l" : "r" );
 
-                            GameObject obj = Instantiate( Resources.Load<GameObject>( path ) );
+                            GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( path ) );
                             addAnimation = obj.GetComponent<GameAnimation>();
                             addAnimation.UI = true;
 
@@ -864,7 +864,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
                         {
                             string path = "Prefab/Misc/Sp005" + ( side == GameBattleAttackResultSide.Left ? "l" : "r" );
 
-                            GameObject obj = Instantiate( Resources.Load<GameObject>( path ) );
+                            GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( path ) );
                             addAnimation = obj.GetComponent<GameAnimation>();
                             addAnimation.UI = true;
 
@@ -879,7 +879,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
                         {
                             string path = "Prefab/Misc/Sp002" + ( side == GameBattleAttackResultSide.Left ? "l" : "r" );
 
-                            GameObject obj = Instantiate( Resources.Load<GameObject>( path ) );
+                            GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( path ) );
                             addAnimation = obj.GetComponent<GameAnimation>();
                             addAnimation.UI = true;
 
@@ -1150,7 +1150,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
 
             string path = "Prefab/Misc/Sp000" + ( side == GameBattleAttackResultSide.Left ? "l" : "r" );
 
-            GameObject obj = Instantiate( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( path ) );
             criticalAnimation = obj.GetComponent<GameAnimation>();
             criticalAnimation.UI = true;
 
@@ -1164,7 +1164,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         {
             string path = "Prefab/Misc/Sp000" + ( side == GameBattleAttackResultSide.Left ? "l" : "r" );
 
-            GameObject obj = Instantiate( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( path ) );
             criticalAnimation = obj.GetComponent<GameAnimation>();
             criticalAnimation.UI = true;
 
@@ -1178,7 +1178,7 @@ public class GameBattleAttackUI : Singleton<GameBattleAttackUI>
         {
             string path = "Prefab/Misc/Sp000" + ( side == GameBattleAttackResultSide.Left ? "l" : "r" );
 
-            GameObject obj = Instantiate( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( path ) );
             criticalAnimation = obj.GetComponent<GameAnimation>();
             criticalAnimation.UI = true;
 

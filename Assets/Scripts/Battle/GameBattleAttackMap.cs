@@ -95,7 +95,7 @@ public class GameBattleAttackMap : Singleton<GameBattleAttackMap>
 
         string path = "Prefab/Misc/Mag_misc";
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         GameAnimation gameAnimation = obj.GetComponent<GameAnimation>();
         gameAnimation.offsetX = GameDefine.BATTLE_OFFSET_X;
         gameAnimation.offsetY = GameDefine.BATTLE_OFFSET_Y - 18;
@@ -237,7 +237,7 @@ GameDefine.getString3( unit.Sprite );
 
         clear();
 
-        GameObject obj1 = Resources.Load<GameObject>( path );
+        GameObject obj1 = SwordsmanHd4xResources.LoadPrefab( path );
 
         if ( obj1 == null )
         {
@@ -381,7 +381,7 @@ GameDefine.getString3( unit.Sprite );
                 return;
             }
 
-            GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             GameAnimation gameAnimation = obj.GetComponent<GameAnimation>();
             gameAnimation.offsetX = GameDefine.BATTLE_OFFSET_X;
             gameAnimation.offsetY = GameDefine.BATTLE_OFFSET_Y;
@@ -397,7 +397,7 @@ GameDefine.getString3( unit.Sprite );
 
             string path1 = "Prefab/JumpHPMap";
 
-            GameObject obj1 = Instantiate<GameObject>( Resources.Load<GameObject>( path1 ) );
+            GameObject obj1 = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path1 ) );
             GameBattleJumpHPMap jumpHP = obj1.GetComponent<GameBattleJumpHPMap>();
 
             Vector3 screenPos = GameCameraManager.instance.mainCamera.WorldToScreenPoint( trans.position );
@@ -511,7 +511,7 @@ GameDefine.getString3( unit.Sprite );
                 return;
             }
 
-            GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             GameAnimation gameAnimation = obj.GetComponent<GameAnimation>();
             gameAnimation.offsetX = GameDefine.BATTLE_OFFSET_X;
             gameAnimation.offsetY = GameDefine.BATTLE_OFFSET_Y;
@@ -527,7 +527,7 @@ GameDefine.getString3( unit.Sprite );
 
             string path1 = "Prefab/JumpHPMap";
 
-            GameObject obj1 = Instantiate<GameObject>( Resources.Load<GameObject>( path1 ) );
+            GameObject obj1 = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path1 ) );
             GameBattleJumpHPMap jumpHP = obj1.GetComponent<GameBattleJumpHPMap>();
 
             Vector3 screenPos = GameCameraManager.instance.mainCamera.WorldToScreenPoint( trans.position );

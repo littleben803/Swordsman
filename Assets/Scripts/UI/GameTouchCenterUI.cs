@@ -1,62 +1,57 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameTouchCenterUI : GameUI<GameTouchCenterUI>
 {
     public void showUI()
     {
-#if ( UNITY_ANDROID || UNITY_IPHONE )
-
-        if ( GameTouchLeftUI.instance.IsShow || 
-            GameTouchLeftUI.instance.IsFadeIn )
+        ConfigurePointerInput();
+        if ( !GameSetting.instance.virtualKeyboardEnabled )
         {
+            GameTouchManager.instance.ResetControls();
+            GameTouchLeftUI.instance.unShow();
+            GameTouchRightUI.instance.unShow();
+            GameTouchManager.instance.SetVisible( false );
+            unShow();
             return;
         }
 
-        GameTouchLeftUI.instance.showUI();
-        GameTouchRightUI.instance.showUI();
+        if ( !GameTouchLeftUI.instance.IsShow || GameTouchLeftUI.instance.IsFadeOut )
+            GameTouchLeftUI.instance.showUI();
+        if ( !GameTouchRightUI.instance.IsShow || GameTouchRightUI.instance.IsFadeOut )
+            GameTouchRightUI.instance.showUI();
+        GameTouchManager.instance.SetVisible( true );
         unShow();
-#else
-//         if ( GameTouchLeftUI.instance.IsShow ||
-//             GameTouchLeftUI.instance.IsFadeIn )
-//         {
-//             return;
-//         }
-// 
-//         GameTouchLeftUI.instance.showUI();
-//         GameTouchRightUI.instance.showUI();
-//         unShow();
+    }
+
+    static void ConfigurePointerInput()
+    {
+#if ENABLE_LEGACY_INPUT_MANAGER && !ENABLE_INPUT_SYSTEM
+        // The project uses legacy Input; its historical Input System UI module cannot read pointers.
+        EventSystem system = EventSystem.current;
+        if ( system == null ) return;
+        foreach ( BaseInputModule module in system.GetComponents<BaseInputModule>() )
+            if ( module.GetType().FullName == "UnityEngine.InputSystem.UI.InputSystemUIInputModule" ) module.enabled = false;
+        if ( system.GetComponent<StandaloneInputModule>() == null ) system.gameObject.AddComponent<StandaloneInputModule>();
+        // Navigation/confirm already run through GameInputManager; avoid submitting twice.
+        system.sendNavigationEvents = false;
 #endif
     }
 
     public void unShowUI()
     {
-#if ( UNITY_ANDROID || UNITY_IPHONE )
-
-        if ( !GameTouchLeftUI.instance.IsShow ||
-            GameTouchLeftUI.instance.IsFadeOut )
+        GameTouchManager.instance.ResetControls();
+        GameTouchManager.instance.SetVisible( false );
+        if ( !GameSetting.instance.virtualKeyboardEnabled )
         {
+            GameTouchLeftUI.instance.unShow();
+            GameTouchRightUI.instance.unShow();
+            unShow();
             return;
         }
 
-        GameTouchLeftUI.instance.unShowFade();
-        GameTouchRightUI.instance.unShowFade();
+        if ( GameTouchLeftUI.instance.IsShow ) GameTouchLeftUI.instance.unShowFade();
+        if ( GameTouchRightUI.instance.IsShow ) GameTouchRightUI.instance.unShowFade();
         show();
-#else
-//         if ( !GameTouchLeftUI.instance.IsShow ||
-//             GameTouchLeftUI.instance.IsFadeOut )
-//         {
-//             return;
-//         }
-// 
-//         GameTouchLeftUI.instance.unShowFade();
-//         GameTouchRightUI.instance.unShowFade();
-//         show();
-#endif
     }
 }

@@ -653,6 +653,7 @@ public class GameBattleUnitManager : Singleton<GameBattleUnitManager>
         {
             GameBattleUnitManager.instance.clearUserActed();
             GameBattleUnitManager.instance.clearNpcActed();
+            GameBattleTurn.instance.RecoverEasyTurn();
         }
         else
         {
@@ -808,7 +809,7 @@ public class GameBattleUnitManager : Singleton<GameBattleUnitManager>
                 if ( user[ i ].IsAlive && 
                     user[ i ].checkEffect( GameSkillResutlEffect.Poison ) )
                 {
-                    user[ i ].addHP( -(int)( user[ i ].HPMax * 0.33f ) );
+                    user[ i ].addHP( -GameEasyRules.Damage( null, user[ i ], (int)( user[ i ].HPMax * 0.33f ) ) );
                     user[ i ].IsHurt = true;
 
                     if ( user[ i ].IsKilled )
@@ -824,7 +825,7 @@ public class GameBattleUnitManager : Singleton<GameBattleUnitManager>
                 if ( npc[ i ].IsAlive && 
                     npc[ i ].checkEffect( GameSkillResutlEffect.Poison ) )
                 {
-                    npc[ i ].addHP( -(int)( npc[ i ].HPMax * 0.33f ) );
+                    npc[ i ].addHP( -GameEasyRules.Damage( null, npc[ i ], (int)( npc[ i ].HPMax * 0.33f ) ) );
                     npc[ i ].IsHurt = true;
 
                     if ( npc[ i ].IsKilled )
@@ -877,7 +878,7 @@ public class GameBattleUnitManager : Singleton<GameBattleUnitManager>
                     GameBattleAttackResultSkill r = new GameBattleAttackResultSkill();
                     r.type = GameSkillResutlType.Damage;
                     r.unit = user[ i ];
-                    r.HP = (int)( user[ i ].HPMax * 0.33f );
+                    r.HP = GameEasyRules.Damage( null, user[ i ], (int)( user[ i ].HPMax * 0.33f ) );
 
                     resultSkill.Add( r );
                 }
@@ -891,7 +892,7 @@ public class GameBattleUnitManager : Singleton<GameBattleUnitManager>
                     GameBattleAttackResultSkill r = new GameBattleAttackResultSkill();
                     r.type = GameSkillResutlType.Damage;
                     r.unit = npc[ i ];
-                    r.HP = (int)( npc[ i ].HPMax * 0.33f );
+                    r.HP = GameEasyRules.Damage( null, npc[ i ], (int)( npc[ i ].HPMax * 0.33f ) );
 
                     resultSkill.Add( r );
                 }

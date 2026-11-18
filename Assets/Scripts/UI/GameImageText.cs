@@ -22,6 +22,7 @@ public class GameImageText : Text
     int line = 0;
 
     bool isStopLine = false;
+    float playbackRate = 1.0f;
 
     public bool IsStopLine { get { return isStopLine; } }
     public bool IsOver { get { return isOver; } }
@@ -41,7 +42,7 @@ public class GameImageText : Text
         gameAnimation.clearAnimation();
     }
 
-    public void showText( string str )
+    public void showText( string str, float rate = 1.0f )
     {
         text = "";
         isOver = false;
@@ -51,6 +52,8 @@ public class GameImageText : Text
         time = 0.0f;
         showIndex = 0;
         line = 0;
+        isStopLine = false;
+        playbackRate = rate;
     }
 
     protected override void OnPopulateMesh( VertexHelper toFill )
@@ -130,7 +133,7 @@ public class GameImageText : Text
             return;
         }
 
-        time += Time.deltaTime;
+        time += Time.deltaTime * playbackRate;
 
         if ( time < speed )
         {

@@ -46,6 +46,7 @@ public class GameUIFade : MonoBehaviour
 
     List<Color> uiImageColorList = new List<Color>();
     List<Color> uiTextColorList = new List<Color>();
+    List<float> uiTextRendererAlphaList = new List<float>();
     List<Color> uiOutlineColorList = new List<Color>();
     List<Color> uiGameAnimationColorList = new List<Color>();
 
@@ -97,6 +98,7 @@ public class GameUIFade : MonoBehaviour
 
         uiImageColorList.Clear();
         uiTextColorList.Clear();
+        uiTextRendererAlphaList.Clear();
         uiOutlineColorList.Clear();
         uiGameAnimationColorList.Clear();
 
@@ -113,6 +115,7 @@ public class GameUIFade : MonoBehaviour
         for ( int i = 0 ; i < uiTextList.Length ; i++ )
         {
             uiTextColorList.Add( uiTextList[ i ].color );
+            uiTextRendererAlphaList.Add( uiTextList[ i ].canvasRenderer.GetAlpha() );
         }
 
         for ( int i = 0 ; i < uiOutlieList.Length ; i++ )
@@ -152,6 +155,7 @@ public class GameUIFade : MonoBehaviour
         for ( int i = 0 ; i < uiTextList.Length ; i++ )
         {
             uiTextList[ i ].color = uiTextColorList[ i ];
+            uiTextList[ i ].canvasRenderer.SetAlpha( uiTextRendererAlphaList[ i ] );
         }
 
         for ( int i = 0 ; i < uiOutlieList.Length ; i++ )
@@ -173,6 +177,7 @@ public class GameUIFade : MonoBehaviour
 
         uiImageColorList.Clear();
         uiTextColorList.Clear();
+        uiTextRendererAlphaList.Clear();
         uiOutlineColorList.Clear();
         uiGameAnimationColorList.Clear();
     }
@@ -195,15 +200,17 @@ public class GameUIFade : MonoBehaviour
 
         for ( int i = 0 ; i < uiTextList.Length ; i++ )
         {
-            Color c = uiTextColorList[ i ];
-            c.a = uiAlpha * c.a;
-            uiTextList[ i ].color = c;
+            // Fade glyphs and shadows together; Shadow can ignore the Graphic's color alpha.
+            uiTextList[ i ].color = uiTextColorList[ i ];
+            uiTextList[ i ].canvasRenderer.SetAlpha( uiAlpha * uiTextRendererAlphaList[ i ] );
         }
 
         for ( int i = 0 ; i < uiOutlieList.Length ; i++ )
         {
             Color c = uiOutlineColorList[ i ];
-            c.a = uiAlpha * c.a;
+            // A text outline that ignores Graphic alpha already receives the renderer fade.
+            if ( uiOutlieList[ i ].useGraphicAlpha || uiOutlieList[ i ].GetComponent<Text>() == null )
+                c.a = uiAlpha * c.a;
             uiOutlieList[ i ].effectColor = c;
         }
 
@@ -272,59 +279,23 @@ public class GameUIFade : MonoBehaviour
             return;
         }
 
-        uiDis = uiFadeIn ? ( uiD - uiTime * uiD / uiT ) : ( uiTime * -uiD / uiT );
+        uiTime += Time.deltaTime;
+        float progress = uiT <= 0.0f ? 1.0f : Mathf.Clamp01( uiTime / uiT );
+        uiDis = uiFadeIn ? uiD * ( 1.0f - progress ) : -uiD * progress;
+        uiAlpha = uiFadeIn ? progress : 1.0f - progress;
 
-        if ( uiFadeIn )
-        {
-            uiTime += Time.deltaTime;
-
-            uiAlpha = uiTime * ( 1.0f / uiT );
-
-            if ( uiTime > uiT )
-            {
-                uiStart = false;
-                uiTime = 0.0f;
-                uiAlpha = 1.0f;
-
-//                updateUIStageOver();
-
-                if ( onEventOver != null )
-                {
-                    onEventOver();
-                }
-
-                return;
-            }
-        }
-        else
-        {
-            uiTime += Time.deltaTime;
-
-            if ( uiTime < 0.0f )
-            {
-                return;
-            }
-
-            uiAlpha = 1.0f - uiTime * ( 1.0f / uiT );
-
-            if ( uiTime > uiT )
-            {
-                uiStart = false;
-                uiTime = 0.0f;
-                uiAlpha = 0.0f;
-
-//                updateUIStageOver();
-
-                if ( onEventOver != null )
-                {
-                    onEventOver();
-                }
-
-                return;
-            }
-        }
-
+        // Apply the final position and opacity before callbacks can hide or restore the UI.
         updateUIStage();
+
+        if ( progress >= 1.0f )
+        {
+            uiStart = false;
+            uiTime = 0.0f;
+            if ( onEventOver != null )
+            {
+                onEventOver();
+            }
+        }
     }
 }
 

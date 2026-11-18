@@ -615,6 +615,7 @@ public class GameAnimation : MonoBehaviour
                         continue;
                     }
 
+                    string otherResourcePath = null;
                     if ( otherGameAnimation.sprites != null &&
                     otherGameAnimation.sprites.Length > 0 )
                     {
@@ -627,15 +628,23 @@ public class GameAnimation : MonoBehaviour
                     }
                     else
                     {
-                        image.sprite = Resources.Load<Sprite>( "Texture/" + otherGameAnimation.animationName + "_t" + ( otherGameAnimation.saf1[ otherTextureID ].saf11[ 0 ].textureID ) );
+                        otherResourcePath = "Texture/" + otherGameAnimation.animationName + "_t" +
+                            ( otherGameAnimation.saf1[ otherTextureID ].saf11[ 0 ].textureID );
+                        image.sprite = SwordsmanHd4xSpriteResolver.LoadResource( otherResourcePath );
 
                         if ( image.sprite == null )
                         {
                             string[] nn = otherGameAnimation.animationName.Split( '/' );
-                            image.sprite = Resources.Load<Sprite>( "Texture/" + otherGameAnimation.animationName + "/" + nn[ nn.Length - 1 ] + "_t" + ( otherGameAnimation.saf1[ otherTextureID ].saf11[ 0 ].textureID ) );
+                            otherResourcePath = "Texture/" + otherGameAnimation.animationName + "/" +
+                                nn[ nn.Length - 1 ] + "_t" +
+                                ( otherGameAnimation.saf1[ otherTextureID ].saf11[ 0 ].textureID );
+                            image.sprite = SwordsmanHd4xSpriteResolver.LoadResource( otherResourcePath );
                         }
                     }
 
+                    image.sprite = string.IsNullOrEmpty( otherResourcePath )
+                        ? SwordsmanHd4xSpriteResolver.Resolve( image.sprite )
+                        : SwordsmanHd4xSpriteResolver.Resolve( image.sprite, otherResourcePath );
                     image.material = GameMaterialConfig.instance.getMaterial( otherGameAnimation.saf1[ otherTextureID ].saf11[ 0 ].textureType );
 
                     //#if UNITY_EDITOR
@@ -647,7 +656,7 @@ public class GameAnimation : MonoBehaviour
                         continue;
                     }
                     //#endif
-                    scale = 0.5f;
+                    scale = SwordsmanHd4xSpriteResolver.GetUIScale( image.sprite , 0.5f );
                     float w1 = image.sprite.rect.width * scale;
                     float h1 = image.sprite.rect.height * scale;
 
@@ -663,6 +672,7 @@ public class GameAnimation : MonoBehaviour
                     continue;
                 }
 
+                string resourcePath = null;
                 if ( sprites != null &&
                     sprites.Length > 0 )
                 {
@@ -670,12 +680,17 @@ public class GameAnimation : MonoBehaviour
                 }
                 else
                 {
-                    image.sprite = Resources.Load<Sprite>( "Texture/" + animationName + "_t" + ( saf1[ f ].saf11[ i ].textureID ) );
+                    resourcePath = "Texture/" + animationName + "_t" +
+                        ( saf1[ f ].saf11[ i ].textureID );
+                    image.sprite = SwordsmanHd4xSpriteResolver.LoadResource( resourcePath );
 
                     if ( image.sprite == null )
                     {
                         string[] nn = animationName.Split( '/' );
-                        image.sprite = Resources.Load<Sprite>( "Texture/" + animationName + "/" + nn[ nn.Length - 1 ] + "_t" + ( saf1[ f ].saf11[ i ].textureID ) );
+                        resourcePath = "Texture/" + animationName + "/" +
+                            nn[ nn.Length - 1 ] + "_t" +
+                            ( saf1[ f ].saf11[ i ].textureID );
+                        image.sprite = SwordsmanHd4xSpriteResolver.LoadResource( resourcePath );
                     }
                 }
 
@@ -703,7 +718,11 @@ public class GameAnimation : MonoBehaviour
                     continue;
                 }
                 //#endif
-                scale = 0.5f;
+                image.sprite = string.IsNullOrEmpty( resourcePath )
+                    ? SwordsmanHd4xSpriteResolver.Resolve( image.sprite )
+                    : SwordsmanHd4xSpriteResolver.Resolve( image.sprite, resourcePath );
+
+                scale = SwordsmanHd4xSpriteResolver.GetUIScale( image.sprite , 0.5f );
                 float w = image.sprite.rect.width * scale;
                 float h = image.sprite.rect.height * scale;
 
@@ -751,6 +770,7 @@ public class GameAnimation : MonoBehaviour
                         break;
                 }
 
+                string resourcePath = null;
                 if ( sprites != null &&
                     sprites.Length > 0 )
                 {
@@ -758,14 +778,24 @@ public class GameAnimation : MonoBehaviour
                 }
                 else
                 {
-                    spriteRenderer.sprite = Resources.Load<Sprite>( "Texture/" + animationName + "_t" + ( saf1[ f ].saf11[ i ].textureID ) );
+                    resourcePath = "Texture/" + animationName + "_t" +
+                        ( saf1[ f ].saf11[ i ].textureID );
+                    spriteRenderer.sprite = SwordsmanHd4xSpriteResolver.LoadResource( resourcePath );
 
                     if ( spriteRenderer.sprite == null )
                     {
                         string[] nn = animationName.Split( '/' );
-                        spriteRenderer.sprite = Resources.Load<Sprite>( "Texture/" + animationName + "/" + nn[ nn.Length - 1 ] + "_t" + ( saf1[ f ].saf11[ i ].textureID ) );
+                        resourcePath = "Texture/" + animationName + "/" +
+                            nn[ nn.Length - 1 ] + "_t" +
+                            ( saf1[ f ].saf11[ i ].textureID );
+                        spriteRenderer.sprite = SwordsmanHd4xSpriteResolver.LoadResource( resourcePath );
                     }
                 }
+
+                spriteRenderer.sprite = string.IsNullOrEmpty( resourcePath )
+                    ? SwordsmanHd4xSpriteResolver.Resolve( spriteRenderer.sprite )
+                    : SwordsmanHd4xSpriteResolver.Resolve(
+                        spriteRenderer.sprite, resourcePath );
 
                 int type = saf1[ f ].saf11[ i ].textureType;
 

@@ -9,8 +9,6 @@ public class GameManager : SingletonManager< GameManager >
 {
 #if UNITY_IPHONE && !UNITY_EDITOR
     [DllImport("__Internal")]
-    internal extern static int joinGroup1();
-    [DllImport("__Internal")]
     internal extern static int getMsg2();
     [DllImport("__Internal")]
     internal extern static string getMsg1();

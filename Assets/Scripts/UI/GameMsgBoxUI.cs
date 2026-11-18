@@ -17,6 +17,7 @@ public class GameMsgBoxUI : GameUI< GameMsgBoxUI >
     OnEventOver onEventOver;
 
     float time = 0.0f;
+    float playbackRate = 1.0f;
 
     public override void initSingleton()
     {
@@ -44,6 +45,16 @@ public class GameMsgBoxUI : GameUI< GameMsgBoxUI >
 
     public void showText( int face , int type , int side , string str , OnEventOver over )
     {
+        ShowText( face, type, side, str, over, 1.0f );
+    }
+
+    public void showDialogue( int face, int type, int side, string str, OnEventOver over )
+    {
+        ShowText( face, type, side, str, over, GameSetting.instance.DialogueSpeedMultiplier );
+    }
+
+    void ShowText( int face, int type, int side, string str, OnEventOver over, float rate )
+    {
         bool bs = IsShow;
 
         clear();
@@ -51,6 +62,7 @@ public class GameMsgBoxUI : GameUI< GameMsgBoxUI >
         show();
 
         onEventOver = over;
+        playbackRate = rate;
 
         switch ( side )
         {
@@ -69,7 +81,7 @@ public class GameMsgBoxUI : GameUI< GameMsgBoxUI >
         }
 
         active.gameObject.SetActive( true );
-        active.showText( face , type , str );
+        active.showText( face , type , str, playbackRate );
 
         if ( !bs )
         {
@@ -88,7 +100,7 @@ public class GameMsgBoxUI : GameUI< GameMsgBoxUI >
 
         if ( active.IsOver || active.IsStopLine )
         {
-            time += Time.deltaTime;
+            time += Time.deltaTime * playbackRate;
 
             if ( time > 5.0f )
             {

@@ -26,6 +26,15 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
     GameBattleTurnType type;
     [SerializeField]
     int turn;
+    int easyRecoveredTurn = -1;
+
+    public void RecoverEasyTurn()
+    {
+        if ( !GameEasyRules.Enabled || !UserTurn || easyRecoveredTurn == turn ||
+            GameBattleJudgment.instance.IsWin || GameBattleJudgment.instance.IsLose ) return;
+        easyRecoveredTurn = turn;
+        foreach ( var unit in GameBattleUnitManager.instance.User ) GameEasyRules.Recover( unit );
+    }
 
     GameAnimation gameAnimation;
     RectTransform transNumbers;
@@ -116,6 +125,7 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
     public void start( int t )
     {
         turn = t;
+        easyRecoveredTurn = t; // A loaded user turn has already received its once-per-round supply.
         type = GameBattleTurnType.User;
     }
 
@@ -129,6 +139,7 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
     public void start()
     {
         turn = 1;
+        easyRecoveredTurn = 1; // New battle units already start with full HP/MP.
         type = GameBattleTurnType.User;
 
         GameBattleUnitManager.instance.showUnits( 0 );
@@ -231,6 +242,14 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
         GameDefine.DestroyAll( transNumbers );
     }
 
+    void setNumberSprite( Image image, int frame )
+    {
+        Sprite legacy = gameAnimation.sprites[ gameAnimation.saf1[ frame ].saf11[ 0 ].textureID ];
+        image.sprite = SwordsmanHd4xSpriteResolver.Resolve( legacy );
+        float scale = SwordsmanHd4xSpriteResolver.GetUIScale( image.sprite, 0.5f );
+        image.rectTransform.sizeDelta = image.sprite.rect.size * scale;
+    }
+
     void showAnimation()
     {
         clear();
@@ -263,10 +282,7 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
         trans.localScale = new Vector3( 1.0f , 1.0f , 1.0f );
 
         Image image = obj.GetComponent<Image>();
-        image.sprite = gameAnimation.sprites[ gameAnimation.saf1[ 0 ].saf11[ 0 ].textureID ];
-
-        float scale = 0.5f;
-        trans.sizeDelta = new Vector2( image.sprite.rect.width * scale , image.sprite.rect.height * scale );
+        setNumberSprite( image, 0 );
 
         if ( n1 > 1 )
         {
@@ -280,10 +296,8 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
             trans.localScale = new Vector3( 1.0f , 1.0f , 1.0f );
 
             image = obj.GetComponent<Image>();
-            image.sprite = gameAnimation.sprites[ gameAnimation.saf1[ n1 ].saf11[ 0 ].textureID ];
+            setNumberSprite( image, n1 );
             image.color = new Color( 1.0f , 1.0f , 1.0f , 0.0f );
-
-            trans.sizeDelta = new Vector2( image.sprite.rect.width * scale , image.sprite.rect.height * scale );
         }
 
         if ( n1 > 0 )
@@ -298,10 +312,8 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
             trans.localScale = new Vector3( 1.0f , 1.0f , 1.0f );
 
             image = obj.GetComponent<Image>();
-            image.sprite = gameAnimation.sprites[ gameAnimation.saf1[ 10 ].saf11[ 0 ].textureID ];
+            setNumberSprite( image, 10 );
             image.color = new Color( 1.0f , 1.0f , 1.0f , 0.0f );
-
-            trans.sizeDelta = new Vector2( image.sprite.rect.width * scale , image.sprite.rect.height * scale );
             x += 1;
         }
 
@@ -317,10 +329,8 @@ public class GameBattleTurn : Singleton<GameBattleTurn>
             trans.localScale = new Vector3( 1.0f , 1.0f , 1.0f );
 
             image = obj.GetComponent<Image>();
-            image.sprite = gameAnimation.sprites[ gameAnimation.saf1[ n2 ].saf11[ 0 ].textureID ];
+            setNumberSprite( image, n2 );
             image.color = new Color( 1.0f , 1.0f , 1.0f , 0.0f );
-
-            trans.sizeDelta = new Vector2( image.sprite.rect.width * scale , image.sprite.rect.height * scale );
         }
 
         startFade = true;

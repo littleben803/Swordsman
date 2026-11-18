@@ -37,7 +37,6 @@ public class GameTitleInput : Singleton<GameTitleInput>
 
         updateSLUI();
 
-        updateCloudSLUI();
 
         updateHelpUI();
 
@@ -97,13 +96,7 @@ public class GameTitleInput : Singleton<GameTitleInput>
             return;
         }
 
-        if ( GameInputManager.getKeyDown( GameInputCode.Right ) )
-        {
-            GameSLUI.instance.unShow();
-            GameSLCloudUI.instance.show( GameSLUI.instance.Type );
-            GameSLCloudUI.instance.show();
-            return;
-        }
+
 
         if ( !bMove )
         {
@@ -114,73 +107,7 @@ public class GameTitleInput : Singleton<GameTitleInput>
     }
 
 
-    void moveCloudSLUI()
-    {
-        bool bMove = false;
 
-        if ( GameSLCloudUI.instance.IsShowAskUI )
-        {
-            if ( GameInputManager.getKeyDown( GameInputCode.Left ) )
-            {
-                bMove = true;
-            }
-            if ( GameInputManager.getKeyDown( GameInputCode.Right ) )
-            {
-                bMove = true;
-            }
-            if ( GameInputManager.getKeyDown( GameInputCode.Up ) )
-            {
-                bMove = true;
-            }
-            if ( GameInputManager.getKeyDown( GameInputCode.Down ) )
-            {
-                bMove = true;
-            }
-
-            if ( !bMove )
-            {
-                return;
-            }
-
-            GameSLCloudUI.instance.showAskUI( !GameSLCloudUI.instance.IsOKAskUI );
-
-            return;
-        }
-
-
-        int selection = GameSLCloudUI.instance.Selection;
-
-        if ( GameInputManager.getKeyDown( GameInputCode.Up ) )
-        {
-            selection--;
-            bMove = true;
-        }
-
-        if ( GameInputManager.getKeyDown( GameInputCode.Down ) )
-        {
-            selection++;
-            bMove = true;
-        }
-
-        if ( GameInputManager.getKeyDown( GameInputCode.Left ) )
-        {
-            GameSLCloudUI.instance.unShow();
-            GameSLUI.instance.show();
-            return;
-        }
-
-        if ( GameInputManager.getKeyDown( GameInputCode.Right ) )
-        {
-            return;
-        }
-
-        if ( !bMove )
-        {
-            return;
-        }
-
-        GameSLCloudUI.instance.select( selection );
-    }
 
 
     void moveTitleUI()
@@ -292,7 +219,7 @@ public class GameTitleInput : Singleton<GameTitleInput>
 
     void updateSLUI()
     {
-        if ( !GameSLUI.instance.IsShow ||
+        if ( !GameSLUI.instance.IsShow || GameSLUI.instance.IsFadeIn ||
             GameBlackUI.instance.IsShow )
         {
             return;
@@ -318,8 +245,8 @@ public class GameTitleInput : Singleton<GameTitleInput>
             else
             {
                 GameSLUI.instance.clear();
-                GameSLUI.instance.unShowFade();
                 GameSLUI.instance.AutoUnshow = false;
+                GameSLUI.instance.unShowFade();
 
                 GameBlackUI.instance.showBlack( 1.0f , onShowBlackOverUnShowSLUI );
             }
@@ -330,73 +257,18 @@ public class GameTitleInput : Singleton<GameTitleInput>
         moveSLUI();
     }
 
-    void updateCloudSLUI()
-    {
-        if ( !GameSLCloudUI.instance.IsShow ||
-            GameBlackUI.instance.IsShow )
-        {
-            return;
-        }
 
-        if ( confirm )
-        {
-            confirm = false;
-
-            GameSLCloudUI.instance.onClick();
-
-            return;
-        }
-
-        if ( cancel )
-        {
-            cancel = false;
-
-            if ( GameSLCloudUI.instance.IsShowAskUI )
-            {
-                GameSLCloudUI.instance.unShowAskUI();
-            }
-            else
-            {
-                GameSLCloudUI.instance.clear();
-                GameSLCloudUI.instance.unShowFade();
-                GameSLCloudUI.instance.AutoUnshow = false;
-
-                GameBlackUI.instance.showBlack( 1.0f , onShowBlackOverCloudUnShowSLUI );
-            }
-
-            return;
-        }
-
-        moveCloudSLUI();
-    }
 
     void onShowBlackOverUnShowSLUI()
     {
         GameSLUI.instance.unShow();
         GameSLUI.instance.updateUIStageFadeOver();
 
-        GameTitleUI.instance.show();
-        GameTitleUI.instance.showFade();
-        GameTitleUI.instance.Pause = true;
-
-        GameBlackUI.instance.unShowBlack( 0.5f , onShowBlackOverUnShowSLUI1 );
-    }
-
-    void onShowBlackOverCloudUnShowSLUI()
-    {
-        GameSLCloudUI.instance.unShow();
-        GameSLCloudUI.instance.updateUIStageFadeOver();
-
-        GameTitleUI.instance.show();
-        GameTitleUI.instance.showFade();
-        GameTitleUI.instance.Pause = true;
-
-        GameBlackUI.instance.unShowBlack( 0.5f , onShowBlackOverUnShowSLUI1 );
-    }
-
-    void onShowBlackOverUnShowSLUI1()
-    {
         GameTitleUI.instance.Pause = false;
+        GameTitleUI.instance.show();
+        GameTitleUI.instance.showFade();
+
+        GameBlackUI.instance.unShowBlack( 0.5f , null );
     }
 
     void onShowBlackOverLoadGame()
@@ -423,7 +295,7 @@ public class GameTitleInput : Singleton<GameTitleInput>
 
     void updateTitleUI()
     {
-        if ( !GameTitleUI.instance.IsShow )
+        if ( !GameTitleUI.instance.IsShow || GameTitleUI.instance.IsFadeIn || GameTitleUI.instance.Pause )
         {
             return;
         }
@@ -515,46 +387,7 @@ public class GameTitleInput : Singleton<GameTitleInput>
         {
             confirm = false;
 
-            switch ( GameHelpUI.instance.Selection )
-            {
-                case 0:
-                    GameHelpUI.instance.onClick0();
-                    break;
-                case 1:
-                    GameHelpUI.instance.onClick1();
-                    break;
-                case 2:
-                    GameHelpUI.instance.onClick2();
-                    break;
-                case 3:
-                    GameHelpUI.instance.onClick3();
-                    break;
-                case 4:
-                    GameHelpUI.instance.onClick4();
-                    break;
-                case 5:
-                    GameHelpUI.instance.onClick5();
-                    break;
-                case 6:
-                    GameHelpUI.instance.onSetting0();
-                    break;
-                case 7:
-                    GameHelpUI.instance.onSetting1();
-                    break;
-                case 8:
-                    GameHelpUI.instance.onSetting20();
-                    break;
-                case 9:
-                    GameHelpUI.instance.onSetting21();
-                    break;
-                case 10:
-                    GameHelpUI.instance.onClick6();
-                    break;
-                case 11:
-                    GameHelpUI.instance.onClick7();
-                    break;
-
-            }
+            GameHelpUI.instance.activateSelection();
 
             return;
         }

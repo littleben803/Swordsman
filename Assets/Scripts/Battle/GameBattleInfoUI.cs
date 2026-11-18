@@ -35,6 +35,9 @@ public class GameBattleInfoUI : MonoBehaviour
 
     void Awake()
     {
+        Image background = transform.Find( "background" ).GetComponent<Image>();
+        background.sprite = SwordsmanHd4xSpriteResolver.Resolve( background.sprite );
+
         imageRed = transform.Find( "hpBar/hpRed" ).GetComponent<Image>();
         imageYellow = transform.Find( "hpBar/hpYellow" ).GetComponent<Image>();
 

@@ -49,6 +49,8 @@ public class GameAlchemyUIBag : MonoBehaviour
     public int Selection { get { return selection; } }
     public bool Enabled { get { return enabled1; } }
 
+    GameAlchemyUISlot SelectedSlot =>
+        pos >= 0 && pos < slot.Length && selection >= 0 && selection < items.Count ? slot[ pos ] : null;
 
     public void setAlchemySelection( int n )
     {
@@ -57,12 +59,12 @@ public class GameAlchemyUIBag : MonoBehaviour
 
     public int getItemSlot()
     {
-        return slot[ pos ].ItemSlot;
+        return SelectedSlot?.ItemSlot ?? GameDefine.INVALID_ID;
     }
 
     public GameItem getItem()
     {
-        return slot[ pos ].Item;
+        return SelectedSlot?.Item;
     }
 
     public Item removeItem()
@@ -82,17 +84,13 @@ public class GameAlchemyUIBag : MonoBehaviour
 
     public bool getItemEnabled()
     {
-        return slot[ pos ].Enabled;
+        var selected = SelectedSlot;
+        return selected != null && selected.Item != null && selected.Enabled;
     }
 
     public string getItemDes()
     {
-        if ( slot[ pos ].Item != null )
-        {
-            return slot[ pos ].Item.Description;
-        }
-
-        return "";
+        return getItem()?.Description ?? "";
     }
 
     void Awake()
@@ -114,25 +112,25 @@ public class GameAlchemyUIBag : MonoBehaviour
 
     public void showAskUI( bool b )
     {
-        if ( !slot[ pos ].Enabled ||
-            slot[ pos ].Item == null )
+        var selected = SelectedSlot;
+        if ( askUI == null || selected == null || !selected.Enabled || selected.Item == null )
         {
             return;
         }
 
         askUI.show( b );
 
-        RectTransform trans = slot[ pos ].GetComponent<RectTransform>();
+        RectTransform trans = selected.GetComponent<RectTransform>();
         askUI.setPos( trans.anchoredPosition.x + 80 , trans.anchoredPosition.y + 11 );
     }
 
     public void unShowAskUI()
     {
-        askUI.unShow();
+        if ( askUI != null ) askUI.unShow();
     }
 
-    public bool IsShowAskUI { get { return askUI.IsShow; } }
-    public bool IsOKAskUI { get { return askUI.IsOK; } }
+    public bool IsShowAskUI { get { return askUI != null && askUI.IsShow; } }
+    public bool IsOKAskUI { get { return askUI != null && askUI.IsOK; } }
 
     public void enable( bool b )
     {
@@ -194,14 +192,16 @@ public class GameAlchemyUIBag : MonoBehaviour
 
     public void select( int n )
     {
+        if ( items.Count == 0 )
+        {
+            clearSelection();
+            updateItems();
+            return;
+        }
+
         if ( n == 0 )
         {
             clearSelection();
-        }
-
-        if ( items.Count == 0 )
-        {
-            return;
         }
 
         bool up = selection > n;

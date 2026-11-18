@@ -237,7 +237,7 @@ public class GameRPGEventManager : Singleton<GameRPGEventManager>
 #endif
                     GameTouchCenterUI.instance.unShowUI();
 
-                    GameMsgBoxUI.instance.showText( face , type , side ,
+                    GameMsgBoxUI.instance.showDialogue( face , type , side ,
                         GameRPGManager.instance.ActiveRPGStage.EMSG[ activeID ].Msg[ num ] , nextEvent );
                 }
                 break;

@@ -150,28 +150,11 @@ public class GamePHP : Singleton< GamePHP >
         StartCoroutine( phpPost( urlSql , i , cb ) );
     }
 
-    public void phpLoad( int i , phpCallback cb )
-    {
-        string id = SystemInfo.deviceUniqueIdentifier;
 
-        string urlSql = url + "CALL .SELECT_SAVE( '" + id + "' , '" + i + "' );";
 
-        StartCoroutine( phpGet( urlSql , i , cb ) );
-    }
 
-    public void phpLoadCloud( string id , int i , phpCallback cb )
-    {
-        string urlSql = url + "CALL .SELECT_CLOUD_SAVE( '" + id + "' , '" + i + "' );";
 
-        StartCoroutine( phpGet( urlSql , i , cb ) );
-    }
 
-    public void phpLoad( string id , int i , phpCallback cb )
-    {
-        string urlSql = url + "CALL .SELECT_SAVE( '" + id + "' , '" + i + "' );";
-
-        StartCoroutine( phpGet( urlSql , i , cb ) );
-    }
 
 
     public void phpLoadIndex( int i , phpCallback cb )

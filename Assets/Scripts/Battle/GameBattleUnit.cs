@@ -82,6 +82,8 @@ public partial class GameBattleUnit : MonoBehaviour
     SpriteRenderer shadowSprite;
 
     short tempExp = 0;
+    int easyExp;
+    int easyDeferredExp;
 
     [SerializeField]
     bool isShow = false;
@@ -115,7 +117,7 @@ public partial class GameBattleUnit : MonoBehaviour
         gameMovement = GetComponent<GameBattleMovement>();
     }
 
-    public short TempExp { get { return tempExp; } }
+    public int TempExp { get { return GameEasyRules.Enabled ? easyExp : tempExp; } }
     public bool IsLevelUp
     {
         get
@@ -123,9 +125,15 @@ public partial class GameBattleUnit : MonoBehaviour
             if ( LV == GameDefine.MAX_LEVEL )
             {
                 tempExp = 0;
+                easyExp = easyDeferredExp = 0;
                 return false;
             }
 
+            if ( GameEasyRules.Enabled )
+            {
+                SettleEasyExperience();
+                return easyExp + gameBattleMan.UnitBase.Exp >= GameDefine.MAX_EXP;
+            }
             return tempExp + gameBattleMan.UnitBase.Exp >= GameDefine.MAX_EXP;
         }
     }
@@ -234,7 +242,17 @@ public partial class GameBattleUnit : MonoBehaviour
 
     public GameAnimationDirection Direction { get { return gameAnimation.animationDirection; } }
 
-    public short[] Skill { get { return gameBattleMan.UnitBase.Skills; } }
+    public short[] Skill
+    {
+        get
+        {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+            if ( IsUser && UnitID < GameDefine.MAX_USER && SwordsmanChapterTestMock.Enabled( SwordsmanChapterMockOption.AllSkills ) )
+                return SwordsmanChapterTestMock.FullSkills( gameBattleMan.UnitBase );
+#endif
+            return gameBattleMan.UnitBase.Skills;
+        }
+    }
     public short[] Items { get { return gameBattleMan.UnitBase.Items; } }
 
     public int LV { get{ return gameBattleMan.UnitBase.LV + gameUnit.BaseLv; } }
@@ -474,6 +492,9 @@ public partial class GameBattleUnit : MonoBehaviour
 
     public void setUnitBase( GameUnitBase b )
     {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+        b = SwordsmanChapterTestMock.ForBattle( this, b );
+#endif
         gameBattleMan.UnitBase = b;
     }
     public GameUnitBase getUnitBase()
@@ -1018,7 +1039,7 @@ public partial class GameBattleUnit : MonoBehaviour
 
         //        exp = 500;
 
-        tempExp += (short)exp;
+        AccumulateExperience( exp );
     }
 
     public void addExpSkill( GameBattleUnit unit , int hp )
@@ -1052,7 +1073,7 @@ public partial class GameBattleUnit : MonoBehaviour
 
 //        exp = 500;
 
-        tempExp += (short)exp;
+        AccumulateExperience( exp );
     }
 
 
@@ -1115,7 +1136,7 @@ public partial class GameBattleUnit : MonoBehaviour
 
 //        exp = 500;
 
-        tempExp += (short)exp;
+        AccumulateExperience( exp );
     }
 
     public void addExpDamage( GameBattleUnit unit , int hp , int mp )
@@ -1180,13 +1201,36 @@ public partial class GameBattleUnit : MonoBehaviour
 
         //        exp = 500;
 
-        tempExp += (short)exp;
+        AccumulateExperience( exp );
     }
 
     public void addExp()
     {
+        if ( GameEasyRules.Enabled )
+        {
+            easyDeferredExp += easyExp;
+            easyExp = 0;
+            SettleEasyExperience();
+            return;
+        }
         gameBattleMan.UnitBase.Exp += tempExp;
         tempExp = 0;
+    }
+
+    void AccumulateExperience( float exp )
+    {
+        if ( !GameEasyRules.Enabled ) { tempExp += (short)exp; return; }
+        int room = Math.Max( 0, ( GameDefine.MAX_LEVEL - LV ) * GameDefine.MAX_EXP -
+            gameBattleMan.UnitBase.Exp - easyExp - easyDeferredExp );
+        easyExp += (int)Math.Min( room, Math.Max( 0L, (long)exp ) * 11 / 10 );
+    }
+
+    void SettleEasyExperience()
+    {
+        if ( LV >= GameDefine.MAX_LEVEL ) { easyExp = easyDeferredExp = 0; return; }
+        int transfer = Math.Min( short.MaxValue - gameBattleMan.UnitBase.Exp, easyDeferredExp );
+        gameBattleMan.UnitBase.Exp += (short)transfer;
+        easyDeferredExp -= transfer;
     }
 
 

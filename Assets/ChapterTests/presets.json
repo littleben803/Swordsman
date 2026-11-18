@@ -1,0 +1,1020 @@
+{
+  "schemaVersion": 2,
+  "entries": [
+    {
+      "stage": 0,
+      "title": "第零幕  独行",
+      "suggestedLevel": 1,
+      "startingParty": [],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 1,
+      "title": "第一幕  因缘",
+      "suggestedLevel": 3,
+      "startingParty": [
+        0
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 2,
+      "title": "第二幕 紫金王鼎",
+      "suggestedLevel": 4,
+      "startingParty": [
+        0,
+        1
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 3,
+      "title": "第三幕  狂剑客",
+      "suggestedLevel": 11,
+      "startingParty": [
+        0,
+        1
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 4,
+      "title": "第四幕  隐者",
+      "suggestedLevel": 9,
+      "startingParty": [
+        0,
+        1,
+        2
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 5,
+      "title": "第五幕  十方鬼众",
+      "suggestedLevel": 10,
+      "startingParty": [
+        0,
+        1,
+        2
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 6,
+      "title": "第六幕  亘古魂幡",
+      "suggestedLevel": 12,
+      "startingParty": [
+        0,
+        1,
+        2
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 7,
+      "title": "第七幕  幽谷寒琴",
+      "suggestedLevel": 16,
+      "startingParty": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 8,
+      "title": "第八幕  杀阵",
+      "suggestedLevel": 16,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 9,
+      "title": "第九幕  玄魔刻印",
+      "suggestedLevel": 18,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 10,
+      "title": "第十幕  悬天古径",
+      "suggestedLevel": 22,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 11,
+      "title": "第十一幕  故人",
+      "suggestedLevel": 26,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 12,
+      "title": "第十二幕  密道",
+      "suggestedLevel": 28,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 13,
+      "title": "第十三幕  九曜之厅",
+      "suggestedLevel": 29,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 14,
+      "title": "第十四幕  萤火",
+      "suggestedLevel": 35,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 15,
+      "title": "第十五幕  魔骸",
+      "suggestedLevel": 35,
+      "startingParty": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 16,
+      "title": "第十六幕  战阵",
+      "suggestedLevel": 39,
+      "startingParty": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 17,
+      "title": "第十七幕  祭天塔",
+      "suggestedLevel": 42,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 18,
+      "title": " 第十八幕  千魔啸夜",
+      "suggestedLevel": 44,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 19,
+      "title": "第十九幕  飞天",
+      "suggestedLevel": 46,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 20,
+      "title": "第二十幕  埋伏",
+      "suggestedLevel": 48,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 21,
+      "title": "第二十一幕  神兵",
+      "suggestedLevel": 52,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 22,
+      "title": "第二十二幕  突围",
+      "suggestedLevel": 53,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 23,
+      "title": "第二十三幕  焚炎劫火",
+      "suggestedLevel": 58,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 24,
+      "title": "第二十三幕  黄泉幽径",
+      "suggestedLevel": 56,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 25,
+      "title": "第二十四幕  无还之道",
+      "suggestedLevel": 55,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 26,
+      "title": "第二十五幕  宿命",
+      "suggestedLevel": 65,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 27,
+      "title": "第二十六幕  剑与非剑",
+      "suggestedLevel": 71,
+      "startingParty": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 28,
+      "title": "第二十七幕  古月",
+      "suggestedLevel": 68,
+      "startingParty": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    },
+    {
+      "stage": 29,
+      "title": "第二十八幕  天琰神煌",
+      "suggestedLevel": 67,
+      "startingParty": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": [
+        216
+      ]
+    },
+    {
+      "stage": 30,
+      "title": "第二十九幕  三界之门",
+      "suggestedLevel": 70,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": [
+        216
+      ]
+    },
+    {
+      "stage": 31,
+      "title": "第三十幕  无幻刹那",
+      "suggestedLevel": 77,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": [
+        216
+      ]
+    },
+    {
+      "stage": 32,
+      "title": "第三十一幕  天之颠地之",
+      "suggestedLevel": 81,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": [
+        216
+      ]
+    },
+    {
+      "stage": 33,
+      "title": "第三十二幕  千幻华舞",
+      "suggestedLevel": 81,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": [
+        216
+      ]
+    },
+    {
+      "stage": 34,
+      "title": "第三十三幕  冰岳绝剑",
+      "suggestedLevel": 83,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "flags": [
+        {
+          "id": 12,
+          "value": 1
+        },
+        {
+          "id": 13,
+          "value": 1
+        },
+        {
+          "id": 14,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 1
+        }
+      ],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": [
+        216
+      ]
+    },
+    {
+      "stage": 35,
+      "title": "番外篇  两百块帝国",
+      "suggestedLevel": 91,
+      "startingParty": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "flags": [],
+      "revision": 2,
+      "validation": "synthetic-branch-fixture",
+      "notes": "合成测试起点：采用夏侯仪留队及七色璎珞分支，以覆盖后期关卡；不代表真实通关、全物品或完整支线。剧情标志依据原始事件条件显式设置。",
+      "items": []
+    }
+  ]
+}

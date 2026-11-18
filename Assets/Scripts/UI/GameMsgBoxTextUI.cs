@@ -55,7 +55,7 @@ public class GameMsgBoxTextUI : MonoBehaviour
         }
     }
 
-    public void showText( int face , int type , string str )
+    public void showText( int face , int type , string str, float playbackRate = 1.0f )
     {
         clear();
 
@@ -63,7 +63,7 @@ public class GameMsgBoxTextUI : MonoBehaviour
         {
             string path = "Prefab/Face/Face" + ( face < 10 ? "0" + face : face.ToString() );
 
-            GameObject faceObj = Resources.Load<GameObject>( path );
+            GameObject faceObj = SwordsmanHd4xResources.LoadPrefab( path );
 
             if ( faceObj == null )
             {
@@ -105,7 +105,7 @@ public class GameMsgBoxTextUI : MonoBehaviour
             }
         }
 
-        text.showText( str );
+        text.showText( str, playbackRate );
     }
 }
 

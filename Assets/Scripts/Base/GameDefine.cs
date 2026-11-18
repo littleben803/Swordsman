@@ -83,7 +83,7 @@ public class GameDefine
 
             float diff = GameUserData.instance.Proficiency / 60.0f + 0.8f;
 
-            if ( GameSetting.instance.mode == GameSetting.GameMode.Normal )
+            if ( GameSetting.instance.mode == GameSetting.GameMode.Normal || GameEasyRules.Enabled )
             {
                 return diff;
             }

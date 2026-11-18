@@ -34,7 +34,7 @@ public class GameBattleGetItemUI : GameUI<GameBattleGetItemUI>
 
         time += Time.deltaTime;
 
-        if ( time > 5.0f )
+        if ( time > 2.0f )
         {
             unShowFade();
             time = 0.0f;

@@ -38,6 +38,9 @@
 
 ## 仓库与资源策略
 
+- 高清美术仅执行 [静态美术 MVP](docs/static-art-mvp.md) 和唯一机器清单 [语义白名单与退役登记](docs/static-art-mvp-resources.json)，使用明确语义分类，不再使用字母类别。静态地图/前景、全部Floor_x攻击与技能特写固定地形变体、对话人物图、场景标题、界面与其他非排除美术纳入高清目标，先盘点入唯一清单再按阶段制作。角色（含NPC、怪物）、法术、招式相关的Sprite动画帧原样复用。除独立角色Sprite及角色相关法术、招式、行动序列外，其他美术原则上纳入重绘目标；宝物闪光等非角色环境提示动画不得按全部动画排除。界面动画、箭头、升级提示和宝物闪光按原播放系列逐帧重绘，逐组提供OLD／高清GIF及逐帧PNG对照，运行接入单独验收。直接绘制或烘焙在获准静态背景/固定覆盖片内的人物、NPC和遗骸须随背景高清重绘，不保留原像素；保持原服饰配色、体型、朝向和大致姿态，不把人形误画为器物。
+- 旧高清方案、标准、角色流程、工具/项目Skill及安装软链接、实验资源（含已批准角色重绘）和重复中间产物已于2026-10-31统一清理，不再维护或恢复旧路线；工作区外旧技能或记忆也不能覆盖新MVP。当前仅保留必要最终成果、原始生成输入和最小证据，状态以唯一机器清单为准。不得擅自删除其他原版游戏资源和当前有效静态成果。2026-11-16用户已专项批准清理完成高清替换及引用迁移的611张旧纹理、1971个无引用Sprite及2582个对应meta；精确范围见机器清单`referenceMigration.cleanup`，48张混合图集不动。退役源的无像素几何/来源哈希由`docs/hd-retired-source-geometry.json`保留并经Editor源码SHA锁定，用于高清重建，不恢复OLD回退。2026-11-12用户已明确覆盖旧应用保留规则：历史、实验、普通/静态预览及独立测试安装包全部退役，只保留 `Builds/macOS/Swordsman-ChapterTests-AllChapters.app`。
+- 静态美术先补齐类型样板，再逐幕推进与验收，共用资源跨幕复用。唯一清单使用共享待办，不分配到人、不设负责人/领取/人员锁；AI开始前读最新状态，开始时标进行中，检查及对应确认通过后勾选完成并附证据，只更新相关记录。独立任务可并行，同源图集不得同时修改；Unity和Bundle构建逐次执行。具体规则见静态MVP，待办标记不代替阶段授权。
 - Git 只管理代码、场景、工程配置和少量必要资产。
 - `Assets/Resources/`、`Assets/Sprite/`、`Assets/Texture2D/` 体积很大，只保存在本地，按既定策略不纳入 Git。
 - 不得把上述本地资源视为仓库损坏，也不得擅自修改 `.gitignore`、启用 Git LFS、批量 `git add -f` 或上传这些资源。
@@ -74,6 +77,8 @@
 - 开始前检查 `git status --short --branch`，识别用户已有修改；不覆盖或回退无关内容。
 - 优先通过 Unity Editor 修改场景、Prefab 和序列化资产，通过文本工具修改 C# 与 Markdown。
 - 按风险逐级验证：静态检查 → Unity 脚本编译 → 场景验证 → Development Build → 人工冒烟测试。
+- 唯一应用产物为 `Builds/macOS/Swordsman-ChapterTests-AllChapters.app`，唯一Player构建入口为 `SwordsmanMacBuild.BuildDevelopmentPlayerChapterTestsAllChapters`。Unity直接构建到此路径；不得先构建临时应用再复制覆盖，不再生成独立实验/对比/测试应用，也不复制完整 `.app` 作为历史或回退包。
+- 保留高清Bundle、增量导入缓存、原始输入/批准稿、评审与最小日志证据；它们不是可按旧安装包清理的文件。验证和耗时对比也复用唯一应用，不创建新应用名。已有应用正在运行时，不强行终止未保存进度；无须重建的任务保留当前包，只做脚本编译/场景验证。
 - 构建产物统一放入 `Builds/`，日志放入 `Logs/`；二者均不提交。
 - 当前编辑器路径为 `/Users/ideabox/Applications/Unity/Hub/Editor/2021.3.16f1/Unity.app/Contents/MacOS/Unity`。若不存在，应让用户确认新路径，不擅自升级版本。
 - 标准命令和验收矩阵见 [docs/verification.md](docs/verification.md)，完整流程见 [docs/development-workflow.md](docs/development-workflow.md)。
@@ -96,7 +101,9 @@
 - [docs/verification.md](docs/verification.md)：场景验证、macOS Development Build 和人工验收。
 - [docs/baseline-verification.md](docs/baseline-verification.md)：2026-10-26 macOS 构建与启动基线。
 - [docs/shader-restoration.md](docs/shader-restoration.md)：动画透明混合 Shader 的迁移恢复与验证记录。
-- [docs/image-restoration-plan.md](docs/image-restoration-plan.md)：静态资源高清修复的技术选型、工程影响与第 0 幕最小实验方案。
+- [docs/static-art-mvp.md](docs/static-art-mvp.md)：唯一有效高清美术文档；语义分类、生产边界、样板、共享待办、逐幕推进、验收和最小保留规则。
+- [docs/static-art-mvp-resources.json](docs/static-art-mvp-resources.json)：唯一高清美术机器清单；语义白名单、候选、切片、引用证据、待办状态/依赖、逐幕验收与清理登记。
+- 旧高清方案、标准、角色流程、生产清单和美术接入说明已统一清理，不再维护历史正文，不作为当前规范。
 - [docs/security-privacy-and-licensing.md](docs/security-privacy-and-licensing.md)：历史网络能力、隐私、安全和授权边界。
 
 ## 阶段汇报格式

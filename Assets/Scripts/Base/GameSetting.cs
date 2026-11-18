@@ -20,7 +20,8 @@ public class GameSetting : SingletonNew< GameSetting >
     public enum GameMode
     {
         Normal = 0,
-        Hard,
+        Hard = 1,
+        Easy = 2,
 
         Count
     }
@@ -52,6 +53,14 @@ public class GameSetting : SingletonNew< GameSetting >
 	public bool enabledSound = true;
 
     public float touchScale = 1.0f;
+    public bool virtualKeyboardEnabled;
+    public bool fastDialogue;
+    public float DialogueSpeedMultiplier { get { return fastDialogue ? 1.5f : 1.0f; } }
+
+    public static bool VirtualKeyboardDefault
+    {
+        get { return Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android; }
+    }
 
     public GameMode mode = GameMode.Normal;
     public GameLocation location = GameLocation.SimplifiedChinese;
@@ -84,6 +93,8 @@ public class GameSetting : SingletonNew< GameSetting >
     public void save()
 	{
         PlayerPrefs.SetFloat( "touchScale" , touchScale );
+        PlayerPrefs.SetInt( "virtualKeyboardEnabled" , virtualKeyboardEnabled ? 1 : 0 );
+        PlayerPrefs.SetInt( "fastDialogue", fastDialogue ? 1 : 0 );
 
         PlayerPrefs.SetInt( "location" , (int)location );
         PlayerPrefs.SetInt( "mode" , (int)mode );
@@ -98,6 +109,8 @@ public class GameSetting : SingletonNew< GameSetting >
 	public void load()
 	{
         touchScale = PlayerPrefs.GetFloat( "touchScale" , 1.0f );
+        virtualKeyboardEnabled = PlayerPrefs.GetInt( "virtualKeyboardEnabled" , VirtualKeyboardDefault ? 1 : 0 ) != 0;
+        fastDialogue = PlayerPrefs.GetInt( "fastDialogue", 0 ) != 0;
 
         location = (GameLocation)PlayerPrefs.GetInt( "location" , 0 );
         mode = (GameMode)PlayerPrefs.GetInt( "mode" , 0 );
@@ -211,7 +224,11 @@ public class GameSetting : SingletonNew< GameSetting >
             //				Debug.Log(e.ToString());
             //			}
             //			#else
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+            PersistentDataPath = SwordsmanChapterTestSession.SaveDirectory;
+#else
             PersistentDataPath = Application.persistentDataPath;
+#endif
 //			#endif
 
 			Debug.Log( Application.persistentDataPath + " " + PersistentDataPath );

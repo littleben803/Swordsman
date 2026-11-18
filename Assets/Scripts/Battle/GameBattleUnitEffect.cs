@@ -110,7 +110,7 @@ public partial class GameBattleUnit : MonoBehaviour
             effectsObject.transform.localPosition = Vector3.zero;
         }
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( "Prefab/Misc/Man_eff" ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Man_eff" ) );
         GameAnimation ani = obj.GetComponent<GameAnimation>();
         ani.offsetX = GameDefine.BATTLE_OFFSET_X;
         ani.offsetY = GameDefine.BATTLE_OFFSET_Y;
@@ -432,11 +432,47 @@ public partial class GameBattleUnit : MonoBehaviour
         }
     }
 
-    public int HP { get { return unitData.HP; } }
-    public int MP { get { return unitData.MP; } }
+    public int HP
+    {
+        get
+        {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+            if ( SwordsmanChapterTestMock.Protects( this, SwordsmanChapterMockOption.InfiniteHP ) ) return 9999;
+#endif
+            return unitData.HP;
+        }
+    }
+    public int MP
+    {
+        get
+        {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+            if ( SwordsmanChapterTestMock.Protects( this, SwordsmanChapterMockOption.InfiniteMP ) ) return 9999;
+#endif
+            return unitData.MP;
+        }
+    }
 
-    public int HPMax { get { return unitData.HPMax; } }
-    public int MPMax { get { return unitData.MPMax; } }
+    public int HPMax
+    {
+        get
+        {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+            if ( SwordsmanChapterTestMock.Protects( this, SwordsmanChapterMockOption.InfiniteHP ) ) return 9999;
+#endif
+            return unitData.HPMax;
+        }
+    }
+    public int MPMax
+    {
+        get
+        {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+            if ( SwordsmanChapterTestMock.Protects( this, SwordsmanChapterMockOption.InfiniteMP ) ) return 9999;
+#endif
+            return unitData.MPMax;
+        }
+    }
 
     public int Move
     {
@@ -539,6 +575,9 @@ public partial class GameBattleUnit : MonoBehaviour
 
     public void addHP( int hp )
     {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+        if ( SwordsmanChapterTestMock.Protects( this, SwordsmanChapterMockOption.InfiniteHP ) ) return;
+#endif
         unitData.HP += hp;
 
         if ( hp < 0 )
@@ -568,6 +607,9 @@ public partial class GameBattleUnit : MonoBehaviour
 
     public void addMP( int mp )
     {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+        if ( SwordsmanChapterTestMock.Protects( this, SwordsmanChapterMockOption.InfiniteMP ) ) return;
+#endif
         unitData.MP += mp;
 
         if ( unitData.MP > unitData.MPMax )

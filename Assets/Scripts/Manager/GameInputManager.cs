@@ -32,10 +32,10 @@ public class GameInputManager : MonoBehaviour
 
     public static bool getKey( GameInputCode c )
     {
-        if ( GameTouchManager.instance.IsShow )
-        {
-            return GameTouchManager.instance.getKey( c );
-        }
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+        if ( SwordsmanChapterTestDesk.InputBlocked || c == GameInputCode.Debug ) return false;
+#endif
+        if ( GameTouchManager.instance.IsShow && GameTouchManager.instance.getKey( c ) ) return true;
 
         switch ( c )
         {
@@ -82,10 +82,10 @@ public class GameInputManager : MonoBehaviour
 
     public static bool getKeyDown( GameInputCode c )
     {
-        if ( GameTouchManager.instance.IsShow )
-        {
-            return GameTouchManager.instance.getKeyDown( c );
-        }
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+        if ( SwordsmanChapterTestDesk.InputBlocked || c == GameInputCode.Debug ) return false;
+#endif
+        if ( GameTouchManager.instance.IsShow && GameTouchManager.instance.getKeyDown( c ) ) return true;
 
         switch ( c )
         {

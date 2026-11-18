@@ -86,7 +86,7 @@ public class GameBattleEventManager : Singleton<GameBattleEventManager>
            emsg[ activeID ].MsgT.Length > talkNum )
         {
             string str = emsg[ activeID ][ talkNum ];
-            GameMsgBoxUI.instance.showText( talkFace , talkType , talkSide , str , nextEvent );
+            GameMsgBoxUI.instance.showDialogue( talkFace , talkType , talkSide , str , nextEvent );
         }
         else
         {

@@ -34,6 +34,7 @@ public class GameUnitBase
     public short BaseSpiritPower;
 
     public short[] Items = new short[ GameDefine.MAX_SLOT ];
+    // Ten legacy slots initially; learned skills may extend this array. Save trailers persist extras.
     public short[] Skills = new short[ GameDefine.MAX_SLOT ];
 
 
@@ -96,27 +97,19 @@ public class GameUnitBase
 
     public void addSkill( short id )
     {
-        for ( int i = 0 ; i < GameDefine.MAX_SLOT ; i++ )
+        if ( id < 0 || hasSkill( id ) ) return;
+        for ( int i = 0; i < Skills.Length; i++ )
         {
-            if ( Skills[ i ] == GameDefine.INVALID_ID )
-            {
-                Skills[ i ] = id;
-                return;
-            }
+            if ( Skills[i] == GameDefine.INVALID_ID ) { Skills[i] = id; return; }
         }
+        int slot = Skills.Length;
+        Array.Resize( ref Skills, slot + 1 );
+        Skills[slot] = id;
     }
 
     public bool hasSkill( short id )
     {
-        for ( int i = 0 ; i < GameDefine.MAX_SLOT ; i++ )
-        {
-            if ( Skills[ i ] == id )
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return Array.IndexOf( Skills, id ) >= 0;
     }
 
     public void addItem( short id )

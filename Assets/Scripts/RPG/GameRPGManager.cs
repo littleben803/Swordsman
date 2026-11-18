@@ -130,7 +130,7 @@ public class GameRPGManager : Singleton<GameRPGManager>
 
         string path = "Prefab/RPG/Rpgman";
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         gameAnimation = obj.GetComponent<GameAnimation>();
         obj.name = "Rpgman";
 
@@ -360,7 +360,7 @@ public class GameRPGManager : Singleton<GameRPGManager>
                     string pathDir = "Prefab/RPG/RPG" + path + "/";
                     string pathTexture = pathDir + activeRPGStage.Layer.L0[ j ].Name.Replace( ".saf" , "" );
 
-                    GameObject imgObject = Resources.Load<GameObject>( pathTexture );
+                    GameObject imgObject = SwordsmanHd4xResources.LoadPrefab( pathTexture );
                     GameObject obj = Instantiate( imgObject , transBackground );
                     obj.name = activeRPGStage.Layer.L0[ j ].Name;
 
@@ -400,7 +400,9 @@ public class GameRPGManager : Singleton<GameRPGManager>
                     transUnit.localPosition = new Vector3( 0.0f , 0.0f , -1100 );
 
                     SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
-                    sprite.sprite = Resources.Load<Sprite>( pathTexture );
+                    sprite.sprite = SwordsmanHd4xSpriteResolver.LoadResource( pathTexture );
+                    sprite.sprite = SwordsmanHd4xSpriteResolver.Resolve(
+                        sprite.sprite, pathTexture );
 
                     float w = activeRPGStage.DTL.Width * GameDefine.TEXTURE_WIDTH;
                     float h = activeRPGStage.DTL.Height * GameDefine.TEXTURE_HEIGHT;
@@ -431,7 +433,7 @@ public class GameRPGManager : Singleton<GameRPGManager>
                 string pathDir = "Prefab/RPG/RPG" + path + "/";
                 string pathTexture = pathDir + activeRPGStage.Layer.L1[ j ].Name;
 
-                GameObject imgObject = Resources.Load<GameObject>( pathTexture );
+                GameObject imgObject = SwordsmanHd4xResources.LoadPrefab( pathTexture );
                 GameObject obj = Instantiate( imgObject , transBackground );
                 obj.name = activeRPGStage.Layer.L1[ j ].Name;
 
@@ -557,7 +559,7 @@ public class GameRPGManager : Singleton<GameRPGManager>
                 string path = "Prefab/RPG/RPG" + GameDefine.getString2( activeID ) + "/";
                 path += activeRPGStage.Layer.L1[ i ].Name;
 
-                GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+                GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
                 ani = obj.GetComponent<GameAnimation>();
 
                 Transform trans = obj.transform;

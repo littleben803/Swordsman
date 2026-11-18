@@ -19,12 +19,17 @@ public class GameSceneTitle : Singleton<GameSceneTitle>
 #if UNITY_IPHONE
         onTitleMovieOver();
 #else
-        GameMovieManager.instance.playMovieCenter( "Movie/Title" , onTitleMovieOver );
+        SwordsmanStartupPrototype.Mark( "title_start" );
+        if ( SwordsmanStartupPrototype.Enabled )
+            GameMovieManager.instance.playStartupPrototype( "Movie/Title", onTitleMovieOver );
+        else
+            GameMovieManager.instance.playMovieCenter( "Movie/Title" , onTitleMovieOver );
 #endif
     }
 
     void onTitleMovieOver()
     {
+        SwordsmanStartupPrototype.Finish( "opening_finished_or_skipped" );
         GameTitleUI.instance.show();
         GameTitleUI.instance.select( 0 );
         GameTitleUI.instance.showFade();

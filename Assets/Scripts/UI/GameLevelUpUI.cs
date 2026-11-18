@@ -29,6 +29,7 @@ public class GameLevelUpUI : GameUI<GameLevelUpUI>
     float time;
 
     OnEventOver onEventOver;
+    GameBattleUnit levelingUnit;
 
 
     public override void initSingleton()
@@ -56,6 +57,7 @@ public class GameLevelUpUI : GameUI<GameLevelUpUI>
     public void show( OnEventOver over , GameBattleUnit unit , GameUnitLevelUp lv )
     {
         onEventOver = over;
+        levelingUnit = unit;
 
         show();
 
@@ -114,6 +116,13 @@ public class GameLevelUpUI : GameUI<GameLevelUpUI>
 
     public void onClick()
     {
+        if ( GameEasyRules.Enabled && levelingUnit != null && levelingUnit.IsLevelUp )
+        {
+            GameUnitLevelUpData.instance.levelUp( levelingUnit );
+            show( onEventOver, levelingUnit, GameUnitLevelUpData.instance.LastData );
+            return;
+        }
+        levelingUnit = null;
         unShow();
 
         if ( onEventOver != null )

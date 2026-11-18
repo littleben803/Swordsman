@@ -380,6 +380,8 @@ GameBattleCursor.instance.PosY ).Floor;
 
                     }
 
+                    GameEasyRules.Skills( resultSkill, unit );
+
                     GameBattleAttackMap.instance.showSkill( skill , unit , dir , resultSkill , onShowOverSkill );
                 }
                 break;
@@ -460,6 +462,7 @@ GameBattleCursor.instance.PosY ).Floor;
                         resultPhysical.HP = 0;
                     }
 
+                    GameEasyRules.Physical( resultPhysical, unit, target );
                     GameItem weapon = unit.Weapon;
 
                     if ( resultPhysical.type != GameBattleAttackResultPhysical.Type.Block &&
@@ -600,6 +603,7 @@ GameBattleCursor.instance.PosY ).Floor;
                         resultSkill.Add( r );
                     }
 
+                    GameEasyRules.Skills( resultSkill, unit );
                     if ( s == GameBattleAttackResultSide.Left )
                     {
                         GameBattleAttackUI.instance.showSkillMap( floor , skill , unit , targets[ 0 ] , dir , s , resultSkill , onShowOverSkill );
@@ -708,6 +712,7 @@ GameBattleCursor.instance.PosY ).Floor;
             resultPhysical.HP = 0;
         }
 
+        GameEasyRules.Physical( resultPhysical, unit, target );
         GameItem weapon = unit.Weapon;
 
         if ( resultPhysical.type != GameBattleAttackResultPhysical.Type.Block &&
@@ -817,7 +822,7 @@ GameBattleCursor.instance.PosY ).Floor;
         {
             string path = "Prefab/Misc/Maplup";
 
-            GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+            GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
             Transform trans = obj.transform;
             trans.SetParent( unit.transform );
             trans.localScale = Vector3.one;
@@ -1463,6 +1468,7 @@ GameBattleCursor.instance.PosY ).Floor;
         }
 
 
+        GameEasyRules.Physical( resultPhysical, target, unit );
         GameItem weapon = target.Weapon;
 
         if ( resultPhysical.type != GameBattleAttackResultPhysical.Type.Block &&

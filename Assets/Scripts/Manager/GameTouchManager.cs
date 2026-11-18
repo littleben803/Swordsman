@@ -12,11 +12,35 @@ class GameTouchManager : SingletonManager<GameTouchManager>
     public bool IsShow { get; set; }
     public override void initSingleton()
     {
-#if ( UNITY_ANDROID || UNITY_IPHONE )
-        IsShow = true;
-#else
         IsShow = false;
-#endif
+    }
+
+    public void SetVisible( bool visible )
+    {
+        if ( IsShow != visible ) onTouchUp();
+        IsShow = visible;
+    }
+
+    void OnApplicationFocus( bool focused )
+    {
+        if ( !focused ) ResetControls();
+    }
+
+    public void ResetControls()
+    {
+        onTouchUp();
+        if ( GameTouchLeftUI.instance != null ) ResetControls( GameTouchLeftUI.instance.gameObject );
+        if ( GameTouchRightUI.instance != null ) ResetControls( GameTouchRightUI.instance.gameObject );
+    }
+
+    static void ResetControls( GameObject root )
+    {
+        foreach ( ETCBase control in root.GetComponentsInChildren<ETCBase>( true ) )
+        {
+            bool active = control.activated;
+            control.activated = false;
+            control.activated = active;
+        }
     }
 
     public bool getKeyDown( GameInputCode c )
@@ -58,6 +82,11 @@ class GameTouchManager : SingletonManager<GameTouchManager>
     public void OnDownUp1()
     {
         isDonw[ (int)GameInputCode.Up1 ] = true;
+    }
+    public void ReleasePaging()
+    {
+        isDonw[(int)GameInputCode.Up1] = isPress[(int)GameInputCode.Up1] = false;
+        isDonw[(int)GameInputCode.Down1] = isPress[(int)GameInputCode.Down1] = false;
     }
     public void OnDownDown1()
     {

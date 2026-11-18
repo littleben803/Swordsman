@@ -28,7 +28,10 @@ public class GameBattleTitleUI : GameUI<GameBattleTitleUI>
     {
         show();
 
-        image.sprite = Resources.Load<Sprite>( "Texture/Map/Stage" + GameDefine.getString2( t ) + "/Tanm_" + GameDefine.getString2( t ) + "_t0" );
+        string resourcePath = "Texture/Map/Stage" + GameDefine.getString2( t ) +
+            "/Tanm_" + GameDefine.getString2( t ) + "_t0";
+        image.sprite = SwordsmanHd4xSpriteResolver.LoadResource( resourcePath );
+        image.sprite = SwordsmanHd4xSpriteResolver.Resolve( image.sprite, resourcePath );
 
         timeAll = 0.5f;
         time = 0.0f;

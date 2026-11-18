@@ -26,6 +26,10 @@ public class GameShopUI : GameUI<GameShopUI>
     Image Background2;
 
     float time;
+    public bool IsPagingListVisible
+    {
+        get { return shopUI != null && shopUI.gameObject.activeInHierarchy || bagUI != null && bagUI.gameObject.activeInHierarchy; }
+    }
 
     public override void initSingleton()
     {
@@ -36,6 +40,8 @@ public class GameShopUI : GameUI<GameShopUI>
 
         shopUI = transform.Find( "shop" ).GetComponent<GameItemBagUI>();
         bagUI = transform.Find( "bag" ).GetComponent<GameItemBagUI>();
+        shopUI.ShopEquipmentReference = shopUI;
+        bagUI.ShopEquipmentReference = shopUI;
 
         moneyText = transform.Find( "money" ).GetComponent<Text>();
         itemText = transform.Find( "item" ).GetComponent<Text>();
@@ -109,6 +115,7 @@ public class GameShopUI : GameUI<GameShopUI>
                 shopUI.setUser( 0 );
                 bagUI.setItems( GameUserData.instance.getUnitBase( 0 ).Items );
             }
+            shopUI.updateItems();
         }
         else
         {
@@ -340,7 +347,7 @@ public class GameShopUI : GameUI<GameShopUI>
 
         string path = "Prefab/Shop/Shop" + GameDefine.getString2( info.shop );
 
-        GameObject gameOjbect = Resources.Load<GameObject>( path );
+        GameObject gameOjbect = SwordsmanHd4xResources.LoadPrefab( path );
         GameObject obj = Instantiate( gameOjbect , transBackground );
         Transform trans = obj.transform;
         trans.localPosition = new Vector3( 0.0f , 0.0f , 0.0f );

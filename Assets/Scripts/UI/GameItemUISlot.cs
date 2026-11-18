@@ -119,7 +119,7 @@ public class GameItemUISlot : MonoBehaviour
         text.color = b ? tc0 : tc1;
         money.color = b ? tc0 : tc1;
 
-        moneyImg.color = b ? tc0 : tc1;
+        moneyImg.color = b ? c0 : c1;
 
         for ( int i = 0 ; i < (int)GameItemType.Count ; i++ )
         {

@@ -103,12 +103,13 @@ public class GameBattleMapUI : GameUI<GameBattleMapUI>
     public void updateData()
     {
         int stage = GameUserData.instance.Stage;
-        image.sprite = gameAnimation.sprites[ stage + 1 ];
+        Sprite legacyMap = gameAnimation.sprites[ stage + 1 ];
+        image.sprite = SwordsmanHd4xSpriteResolver.Resolve( legacyMap );
 
-        float w = image.sprite.rect.width;
-        float h = image.sprite.rect.height;
+        float w = legacyMap.rect.width / legacyMap.pixelsPerUnit;
+        float h = legacyMap.rect.height / legacyMap.pixelsPerUnit;
 
-        transImage.sizeDelta = new Vector2( w * 0.5f , h * 0.5f );
+        transImage.sizeDelta = new Vector2( w , h );
         transImage.anchoredPosition = new Vector2( 0.0f , 0.0f );
 
         clear();

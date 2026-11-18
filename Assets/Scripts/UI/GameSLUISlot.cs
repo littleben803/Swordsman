@@ -40,6 +40,25 @@ class GameSLUISlot : MonoBehaviour
         Turn1 = transform.Find( "Turn1" ).GetComponent<Text>();
         time = transform.Find( "time" ).GetComponent<Text>();
 
+        Proficiency0.gameObject.SetActive( false );
+        Proficiency1.gameObject.SetActive( false );
+        Turn0.gameObject.SetActive( false );
+
+        // Render the label and value together so the whole row shares the time's right edge.
+        RectTransform turnRect = Turn1.rectTransform;
+        turnRect.anchoredPosition = new Vector2( 112.0f , -8.0f );
+        turnRect.sizeDelta = new Vector2( 140.0f , 32.0f );
+        Turn1.alignment = TextAnchor.MiddleRight;
+
+        // Keep both time lines inside the slot, above the separate turn-count row.
+        RectTransform timeRect = time.rectTransform;
+        timeRect.anchoredPosition = new Vector2( 112.0f , 5.0f );
+        timeRect.sizeDelta = new Vector2( 140.0f , 32.0f );
+        time.fontSize = 10;
+        time.alignment = TextAnchor.UpperRight;
+        time.horizontalOverflow = HorizontalWrapMode.Wrap;
+        time.verticalOverflow = VerticalWrapMode.Truncate;
+
         imageBackground = GetComponent<Image>();
     }
 
@@ -84,26 +103,16 @@ class GameSLUISlot : MonoBehaviour
         text.text = stage.SDES.Title;
         lvText.text = GameDefine.getBigInt( info.LV.ToString() );
 
-        Proficiency0.text = GameStringData.instance.getString( GameStringType.SL0 );
-        Proficiency1.text = GameDefine.getBigInt( info.Proficiency.ToString() ) + " ";
-
-        if ( info.Proficiency < info.Stage - info.Stage / 5 )
-        {
-            Proficiency1.text += GameStringData.instance.getString( GameStringType.SL2 );
-        }
-        else
-        {
-            Proficiency1.text += GameStringData.instance.getString( GameStringType.SL3 );
-        }
-
-        Turn0.text = GameStringData.instance.getString( GameStringType.SL4 );
-        Turn1.text = GameDefine.getBigInt( info.TurnCount.ToString() );
+        Turn1.text = GameStringData.instance.getString( GameStringType.SL4 ) +
+            GameDefine.getBigInt( info.TurnCount.ToString() );
 
         DateTime dt = DateTime.Parse( "1970-01-01 00:00:00" ).AddSeconds( info.TimeData );
-        time.text = dt.ToLocalTime().ToString( "yyyy-MM-dd HH:mm:ss" ) + " ";
+        time.text = dt.ToLocalTime().ToString( "yyyy-MM-dd HH:mm" , System.Globalization.CultureInfo.InvariantCulture );
 
-        dt = DateTime.Parse( "1970-01-01 00:00:00" ).AddSeconds( info.Time );
-        time.text += GameStringData.instance.getString( GameStringType.Time0 ) + string.Format( "{0:T}" , dt );
+        // Play time is a duration: keep total hours even after the first 24 hours.
+        int totalMinutes = Math.Max( 0 , info.Time ) / 60;
+        time.text += "\n" + GameStringData.instance.getString( GameStringType.Time0 ) +
+            string.Format( System.Globalization.CultureInfo.InvariantCulture , "{0:D2}:{1:D2}" , totalMinutes / 60 , totalMinutes % 60 );
     }
 
     void Update()

@@ -196,7 +196,7 @@ public class GameBattleManager : Singleton< GameBattleManager >
         string path = "Prefab/Stage/Stage" + GameDefine.getString2( GameUserData.instance.Stage ) + "/Eanm_";
         path += GameDefine.getString2( name );
 
-        GameObject obj = Instantiate<GameObject>( Resources.Load<GameObject>( path ) );
+        GameObject obj = Instantiate<GameObject>( SwordsmanHd4xResources.LoadPrefab( path ) );
         ani = obj.GetComponent<GameAnimation>();
         obj.name = "Eanm_" + GameDefine.getString2( name );
 
@@ -267,11 +267,20 @@ public class GameBattleManager : Singleton< GameBattleManager >
 
     public void updateTreasures()
     {
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+        // Rebuild from remaining event IDs; avoid duplicates on turn/load refresh.
+        for ( int child = transTreasures.childCount - 1; child >= 0; child-- )
+        {
+            GameObject previous = transTreasures.GetChild( child ).gameObject;
+            previous.SetActive( false );
+            Destroy( previous );
+        }
+#endif
         GameBattleDTL dtl = activeBattleStage.DTL;
 
         string path = "Prefab/Misc/TREASURE";
 
-        GameObject gameObject = Resources.Load<GameObject>( path ) ;
+        GameObject gameObject = SwordsmanHd4xResources.LoadPrefab( path ) ;
 
         bool[] bc = new bool[ activeBattleStage.MEVT.Length ];
         for ( int i = 0 ; i < bc.Length ; i++ )
@@ -294,6 +303,11 @@ public class GameBattleManager : Singleton< GameBattleManager >
                         continue;
                     }
 
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+                    bool hidden = mapEvent[dtl.Points[ii].MapEvent].MapShow == -1;
+                    if ( hidden && !SwordsmanChapterTestMock.Enabled( SwordsmanChapterMockOption.HiddenTreasure ) )
+                    { ii++; continue; }
+#endif
                     GameObject obj = Instantiate<GameObject>( gameObject , transTreasures );
                     obj.name = dtl.Points[ ii ].MapEvent.ToString();
 
@@ -302,6 +316,9 @@ public class GameBattleManager : Singleton< GameBattleManager >
                         -i * GameDefine.TEXTURE_HEIGHT + layerHeight , 0.0f );
 
                     GameAnimation gameAnimation = obj.GetComponent<GameAnimation>();
+#if SWORDSMAN_CHAPTER_TESTS && (DEVELOPMENT_BUILD || UNITY_EDITOR)
+                    if ( hidden ) gameAnimation.setColor( new Color( 0.45f, 0.9f, 1 ) );
+#endif
                     gameAnimation.playAnimation();
                     gameAnimation.offsetX = GameDefine.BATTLE_OFFSET_X;
                     gameAnimation.offsetY = GameDefine.BATTLE_OFFSET_Y;
@@ -603,7 +620,7 @@ public class GameBattleManager : Singleton< GameBattleManager >
                     string pathDir = "Prefab/Stage/Stage" + path + "/";
                     string pathTexture = pathDir + activeBattleStage.Layer.L1[ j ].Name;
 
-                    GameObject imgObject = Resources.Load<GameObject>( pathTexture );
+                    GameObject imgObject = SwordsmanHd4xResources.LoadPrefab( pathTexture );
                     GameObject obj = Instantiate( imgObject , transBackground );
                     obj.name = activeBattleStage.Layer.L1[ j ].Name;
 
@@ -770,7 +787,7 @@ public class GameBattleManager : Singleton< GameBattleManager >
                     string pathDir = "Prefab/Stage/Stage" + path + "/";
                     string pathTexture = pathDir + activeBattleStage.Layer.L0[ j ].Name.Replace( ".saf" , "" );
 
-                    GameObject imgObject = Resources.Load<GameObject>( pathTexture );
+                    GameObject imgObject = SwordsmanHd4xResources.LoadPrefab( pathTexture );
                     GameObject obj = Instantiate( imgObject , GameCameraManager.instance.transform );
                     obj.name = activeBattleStage.Layer.L0[ j ].Name;
 
@@ -793,7 +810,7 @@ public class GameBattleManager : Singleton< GameBattleManager >
                     string pathDir = "Texture/Map/Stage" + path + "/";
                     string pathTexture = pathDir + activeBattleStage.Layer.L0[ j ].Name;
 
-                    GameObject imgObject = Resources.Load<GameObject>( "Prefab/Map" );
+                    GameObject imgObject = SwordsmanHd4xResources.LoadPrefab( "Prefab/Map" );
                     GameObject obj = Instantiate( imgObject , transBackground );
                     obj.name = activeBattleStage.Layer.L0[ j ].Name;
 
@@ -804,7 +821,9 @@ public class GameBattleManager : Singleton< GameBattleManager >
                     trans.localScale = new Vector3( 1.0f , 1.0f , 1.0f );
 
                     SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
-                    sprite.sprite = Resources.Load<Sprite>( pathTexture );
+                    sprite.sprite = SwordsmanHd4xSpriteResolver.LoadResource( pathTexture );
+                    sprite.sprite = SwordsmanHd4xSpriteResolver.Resolve(
+                        sprite.sprite, pathTexture );
 
                     float w = activeBattleStage.Layer.L0[ j ].Width * GameDefine.TEXTURE_WIDTH;
                     float h = activeBattleStage.Layer.L0[ j ].Height * GameDefine.TEXTURE_HEIGHT;
@@ -855,7 +874,7 @@ public class GameBattleManager : Singleton< GameBattleManager >
             string pathDir = "Prefab/Stage/Stage" + path + "/";
             string pathTexture = pathDir + activeBattleStage.Layer.L1[ j ].Name;
 
-            GameObject imgObject = Resources.Load<GameObject>( pathTexture );
+            GameObject imgObject = SwordsmanHd4xResources.LoadPrefab( pathTexture );
             GameObject obj = Instantiate( imgObject , transBackground );
             obj.name = activeBattleStage.Layer.L1[ j ].Name;
 
@@ -1061,7 +1080,7 @@ public class GameBattleManager : Singleton< GameBattleManager >
                                     return;
                                 }
 
-                                if ( unit.UnitID == 0 && GameUserData.instance.Proficiency < 25 - PlayerPrefs.GetInt( "review" , 0 ) )
+                                if ( unit.UnitID == 0 && GameUserData.instance.Proficiency < 25 )
                                 {
                                     onCheckMapEvent();
                                     return;

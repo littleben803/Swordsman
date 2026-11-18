@@ -68,7 +68,7 @@ public class GameBattleCursor : Singleton<GameBattleCursor>
     {
         trans = transform;
 
-        GameObject obj = Instantiate( Resources.Load<GameObject>( "Prefab/Misc/Cursor" ) );
+        GameObject obj = Instantiate( SwordsmanHd4xResources.LoadPrefab( "Prefab/Misc/Cursor" ) );
 
         gameAnimation = obj.GetComponent<GameAnimation>();
         gameAnimation.offsetX = -145;

@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 public class GameTouchLeftUI : GameUI<GameTouchLeftUI>
 {
+    public override void initSingleton()
+    {
+        GameVirtualKeyboardSkin.ApplyLeft( transform );
+    }
 
     public void showUI()
     {

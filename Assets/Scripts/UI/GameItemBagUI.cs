@@ -47,6 +47,7 @@ public class GameItemBagUI : MonoBehaviour
     public int UserID { get { return userID; } }
     public int Selection { get { return selection; } }
     public bool Enabled { get{ return enabled1; } }
+    public GameItemBagUI ShopEquipmentReference { private get; set; }
 
 
     public int getItemSlot()
@@ -438,7 +439,10 @@ public class GameItemBagUI : MonoBehaviour
                     }
                     else
                     {
-                        slot[ i ].setData( item , item.canEquip( GameItemUI.instance.UserID ) , type == GameItemBagUIType.Shop );
+                        int equipmentUserID = ShopEquipmentReference != null
+                            ? ShopEquipmentReference.UserID
+                            : GameItemUI.instance.UserID;
+                        slot[ i ].setData( item , item.canEquip( equipmentUserID ) , type == GameItemBagUIType.Shop );
                     }
 
                     slot[ i ].enable( true );
